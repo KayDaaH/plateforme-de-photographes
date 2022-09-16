@@ -25,7 +25,7 @@ function photographerFactory(data) {
     const localisation = document.createElement("localisation");
     const description = document.createElement("description");
     const cost = document.createElement("cost");
-    h2.textContent = name;
+    h2.innerHTML = `<a  id="url" href="../photographer.html?name=${name}"> ${name}</a> `;
     localisation.textContent = `${country}, ${city}`;
     description.textContent = tagline;
     cost.textContent = `${price}€/jour`;
@@ -34,7 +34,13 @@ function photographerFactory(data) {
     article.appendChild(localisation);
     article.appendChild(description);
     article.appendChild(cost);
+
     return article;
   }
   return { name, picture, getUserCardDOM };
 }
+
+// const url = `../photographer.html?name=${name}`;
+// const url2 = new URL(url);
+// const urlName = url2.searchParams.get("name");
+// console.log(urlName);

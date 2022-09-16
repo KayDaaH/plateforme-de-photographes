@@ -16,10 +16,26 @@ async function displayData(photographers) {
   });
 }
 
+let test = 0;
 async function init() {
   // Récupère les datas des photographes
   const photographers = await getPhotographers();
   displayData(photographers);
+  test = 1;
 }
 
 init();
+
+function test2() {
+  setTimeout(() => {
+    const url = document.getElementById("url");
+    url.addEventListener(
+      "click",
+      () => {
+        alert("Hello");
+      },
+      5000
+    );
+  });
+}
+test2();
