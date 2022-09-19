@@ -25,7 +25,7 @@ function photographerFactory(data) {
     const localisation = document.createElement("localisation");
     const description = document.createElement("description");
     const cost = document.createElement("cost");
-    h2.innerHTML = `<a  id="url" href="../photographer.html?name=${name}"> ${name}</a> `;
+    h2.innerHTML = `<a  class="url" href="../photographer.html?name=${name}"> ${name}</a> `;
     localisation.textContent = `${country}, ${city}`;
     description.textContent = tagline;
     cost.textContent = `${price}€/jour`;
