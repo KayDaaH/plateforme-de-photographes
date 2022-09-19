@@ -31,11 +31,9 @@ async function init() {
   // Récupère les datas des photographes
   const photographers = await getPhotographers();
   displayData(photographers);
-  console.log(photographers);
-  console.log("Log dans la fonction init()");
   document.querySelectorAll(".url").forEach((item) => {
     item.addEventListener("click", (event) => {
-      console.log("log addeventlistner");
+      event.preventDefault();
       console.log(item.href);
       //handle click
     });
