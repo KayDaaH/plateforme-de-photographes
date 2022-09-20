@@ -1,6 +1,7 @@
 const urlLocation = window.location.search;
 const params = new URLSearchParams(urlLocation);
 let photographerID = 0;
+let PhotographerMedias = [];
 
 async function getPhotographer() {
   const data = await fetch("../data/photographers.json");
@@ -18,6 +19,8 @@ async function displayData(photographers) {
       const photographerModel = photographerFactory(item);
       const userCardDOM = photographerModel.getUserCardDOM();
       photographersHeader.appendChild(userCardDOM);
+      console.log(photographersHeader);
+      console.log(userCardDOM);
       photographerID = item.id;
     }
   });
@@ -32,18 +35,21 @@ async function getMedia() {
 }
 
 async function mediaData(media) {
-  const photographersHeader = document.querySelector(".photograph-header");
+  const photographerMediaHTML = document.querySelector(".photos-factory");
   const photographerId = params.get("id");
 
   media.forEach((item) => {
     if (photographerId === item.photographerId.toString()) {
-      const photographerModel = mediaFactory(item);
-      console.log(item);
-      // const userCardDOM = photographerModel.getUserCardDOM();
-      // photographersHeader.appendChild(userCardDOM);
-      photographerID = item.id;
+      PhotographerMedias.push(item);
+
+      // photographerID = item.id;
     }
   });
+  const photographerMedia = mediaFactory(PhotographerMedias);
+  const mediaCardDOM = photographerMedia.photosFactoryDOM();
+  // photographerMediaHTML.appendChild(mediaCardDOM);
+  console.log(photographerMediaHTML);
+  console.log(mediaCardDOM);
 }
 
 // async function getPictures() {
