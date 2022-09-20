@@ -26,11 +26,6 @@ async function init() {
   // Récupère les datas des photographes
   const photographers = await getPhotographers();
   displayData(photographers);
-  document.querySelectorAll(".url").forEach((item) => {
-    item.addEventListener("click", (event) => {
-      console.log(item.href);
-    });
-  });
 }
 
 init();
