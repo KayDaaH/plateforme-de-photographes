@@ -8,26 +8,27 @@ function mediaFactory(data) {
       const title = item.title;
       const price = item.price;
       const id = item.photographerId;
+      const like = item.likes;
       const article = document.createElement("article");
       let contents;
       let media;
       if (item.image) {
         contents = document.createElement("img");
         media = item.image;
-        console.log("oui");
       } else {
         contents = document.createElement("video");
         media = item.video;
-        console.log("non");
       }
       contents.setAttribute("src", `../assets/photos/${id}/${media}`);
       const h2 = document.createElement("h2");
-      const cost = document.createElement("cost");
+      const likes = document.createElement("likes");
+      const pricePerDay = document.getElementById("pricePerDay");
       h2.textContent = `${title}`;
-      cost.textContent = `${price}€/jour`;
+      likes.innerHTML = `${like} <i class="fa-solid fa-heart"></i>`;
+      pricePerDay.textContent = `${price}€ / jour`;
       article.appendChild(contents);
       article.appendChild(h2);
-      article.appendChild(cost);
+      article.appendChild(likes);
       photographerMediaHTML.appendChild(article);
 
       return photographerMediaHTML;

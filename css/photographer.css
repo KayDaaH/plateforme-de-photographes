@@ -20,6 +20,33 @@ header {
   display: none;
 }
 
+#infos {
+  position: relative;
+  display: flex;
+  position: fixed;
+  height: 70px;
+  width: 410px;
+  background-color: #db8876;
+  bottom: 0px;
+  right: 35px;
+  border-radius: 5px 5px 0px 0px;
+  align-items: center;
+}
+
+#total-likes {
+  position: absolute;
+  left: 40px;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+#infos p {
+  position: absolute;
+  right: 40px;
+  font-size: 23px;
+  font-weight: bold;
+}
+
 .photograph-header {
   position: relative;
   background-color: #fafafa;
@@ -110,6 +137,24 @@ cost {
   width: 100%;
   border-radius: 0px;
   object-fit: cover;
+}
+
+.photos-factory article h2 {
+  position: absolute;
+  color: #c23211;
+  top: 357px;
+  /* bottom: -60px; */
+  left: 0px;
+  margin-top: 0px;
+}
+
+.photos-factory article likes {
+  position: absolute;
+  color: #c23211;
+  bottom: -37px;
+  right: 0px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .modal {
