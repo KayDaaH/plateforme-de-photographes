@@ -8,6 +8,7 @@ function mediaFactory(data) {
       const title = item.title;
       const price = item.price;
       const id = item.photographerId;
+      const contentId = item.id;
       const like = item.likes;
       const article = document.createElement("article");
       let contents;
@@ -19,7 +20,10 @@ function mediaFactory(data) {
         contents = document.createElement("video");
         media = item.video;
       }
+      // console.log(contentId.toString().length);
       contents.setAttribute("src", `../assets/photos/${id}/${media}`);
+      contents.setAttribute("id", `${contentId}`);
+      contents.setAttribute("class", `photographer-content`);
       const h2 = document.createElement("h2");
       const likes = document.createElement("likes");
       const pricePerDay = document.getElementById("pricePerDay");
@@ -32,6 +36,15 @@ function mediaFactory(data) {
       photographerMediaHTML.appendChild(article);
 
       return photographerMediaHTML;
+    });
+
+    const contentNodelist = document.querySelectorAll(".photographer-content");
+    console.log(contentNodelist);
+
+    contentNodelist.forEach((e) => {
+      e.addEventListener("click", () => {
+        console.log(e);
+      });
     });
   }
 
