@@ -51,18 +51,15 @@ function panorama() {
   contentNodelist.forEach((e) => {
     e.addEventListener("click", () => {
       const link = e.src;
-      console.log(e);
-      console.log(e.src);
-      console.log(e.id);
       console.log(e.className);
 
       const diaporamaContainer = document.querySelector(".diaporama-container");
       const slideContent = document.querySelector(".slide-content");
       if (link.indexOf("jpg") !== -1) {
-        slideContent.innerHTML = `<img class="slide-content-diaporama" id="${e.id}"src="${e.src}">`;
+        slideContent.innerHTML = `<img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}">`;
         diaporamaContainer.style.display = "block";
       } else {
-        slideContent.innerHTML = `<video class="slide-content-diaporama" id="${e.id}"controls src="${e.src}"></video>`;
+        slideContent.innerHTML = `<video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}"></video>`;
         diaporamaContainer.style.display = "block";
       }
     });
@@ -77,18 +74,27 @@ function plusSlides(n) {
   const slideContent = document.querySelector(".slide-content");
   const previousContent = document.getElementById("prev-less");
   const nextContent = document.getElementById("prev-plus");
-  const slideContentPanorama = document.querySelector(
-    ".slide-content-panorama"
-  );
+  const slideContentDiapo = document.querySelector(".slide-content-diapo");
   const array = [...contentNodelist];
-  let indexContent = array.indexOf(slideContentPanorama);
+  let indexContent = array.indexOf(slideContentDiapo.id);
+  const index = slideContentDiapo.className.slice(
+    41,
+    slideContentDiapo.className.length
+  );
 
   if (n === 1) {
     // console.log(nextContent);
     console.log("--------------");
+    contentNodelist.forEach((e) => {
+      if (e.className.indexOf(index) !== -1) {
+        console.log(index);
+        console.log(e.className);
+      }
+    });
 
-    // console.log(slideContent);
-    console.log(slideContentPanorama);
+    // console.log(
+    //   slideContentDiapo.className.slice(20, slideContentDiapo.className.length)
+    // );
     // console.log(indexContent);
     // console.log("--------------");
     // console.log(indexContent);
