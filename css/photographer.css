@@ -296,10 +296,17 @@ form input {
   max-width: 80%;
 }
 
+.slide-content video {
+  position: absolute;
+  max-height: 100%;
+  max-width: 80%;
+}
+
 .prev {
   text-decoration: none;
   color: #901c1c;
   font-size: 45px;
+  cursor: pointer;
 }
 
 /* .close-slide {
@@ -313,8 +320,8 @@ form input {
   position: absolute;
   top: 45px;
   right: 0px;
-  width: 56px;
-  height: 56px;
+  width: 37px;
+  height: 37px;
   line-height: 26px;
   cursor: pointer;
 }
@@ -325,7 +332,7 @@ form input {
   position: absolute;
   height: 45px;
   width: 5px;
-  top: 5px;
+  top: -2px;
   right: 14px;
   background: #901c1c;
 }
