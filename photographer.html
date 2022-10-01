@@ -59,13 +59,19 @@
     </div>
   </div>
   <!-- --------------------diaporama -->
+
   <div class="diaporama-container">
-    <div class="diaporama-overlay diaporama-trigger" onclick="closeDiaporama()"></div>
+    <div class="diaporama-overlay diaporama-trigger"></div>
     <div class="slides">
+      <div class="slide-prev">
+        <a href="" class="prev" onclick="plusSlides(-1)">&#10094</a>
+      </div>
       <div class="slide-content"></div>
+      <div class="slide-perv-plus">
+        <a href="" class="prev" onclick="plusSlides(1)">&#10095</a>
+      </div>
+      <div class="close-slide" onclick="closeDiaporama()"></div>
       <div class="content-tile"></div>
-      <a href="" class="prev" onclick="plusSlides(-1)">&#10094</a>
-      <a href="" class="prev" onclick="plusSlides(1)">&#10095</a>
     </div>
   </div>
 

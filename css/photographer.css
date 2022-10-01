@@ -247,3 +247,106 @@ form input {
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* ---------------------- */
+
+.diaporama-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.diaporama-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.slides {
+  position: absolute;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  height: 90%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.slide-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.slide-content img {
+  position: absolute;
+  max-height: 100%;
+  max-width: 80%;
+}
+
+.prev {
+  text-decoration: none;
+  color: #901c1c;
+  font-size: 45px;
+}
+
+/* .close-slide {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 75px;
+} */
+
+.close-slide {
+  position: absolute;
+  top: 45px;
+  right: 0px;
+  width: 56px;
+  height: 56px;
+  line-height: 26px;
+  cursor: pointer;
+}
+
+.close-slide::before,
+.close-slide::after {
+  content: "";
+  position: absolute;
+  height: 45px;
+  width: 5px;
+  top: 5px;
+  right: 14px;
+  background: #901c1c;
+}
+.close-slide::before {
+  transform: rotate(45deg);
+}
+.close-slide::after {
+  transform: rotate(-45deg);
+}
+
+/* .modal header {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal header img {
+  cursor: pointer;
+}
+
+.modal header h2 {
+  font-size: 42px;
+  font-weight: normal;
+  text-align: center;
+} */

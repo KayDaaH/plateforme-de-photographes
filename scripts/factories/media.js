@@ -37,16 +37,32 @@ function mediaFactory(data) {
 
       return photographerMediaHTML;
     });
-
-    const contentNodelist = document.querySelectorAll(".photographer-content");
-    console.log(contentNodelist);
-
-    contentNodelist.forEach((e) => {
-      e.addEventListener("click", () => {
-        console.log(e);
-      });
-    });
+    panorama();
   }
 
   return { photosFactoryDOM };
+}
+
+function panorama() {
+  const contentNodelist = document.querySelectorAll(".photographer-content");
+  console.log(contentNodelist);
+
+  contentNodelist.forEach((e) => {
+    e.addEventListener("click", () => {
+      const link = e.src;
+      // const article = document.createElement("article");
+      // const content = document.createElement("content");
+      const diaporamaContainer = document.querySelector(".diaporama-container");
+      const slideContent = document.querySelector(".slide-content");
+      if (link.indexOf("jpg") !== -1) {
+        console.log("hello");
+        console.log(e);
+        console.log(e.toString());
+        slideContent.innerHTML = `<img src="${e.src}">`;
+        diaporamaContainer.style.display = "block";
+      } else {
+        console.log("pas hello");
+      }
+    });
+  });
 }

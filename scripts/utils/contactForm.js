@@ -6,6 +6,8 @@ const formName = document.getElementById("name");
 const formEmail = document.getElementById("email");
 const formMessage = document.getElementById("message");
 
+const diaporamaContainer = document.querySelector(".diaporama-container");
+
 submitBtn.addEventListener("click", btnFormAction);
 
 function displayModal() {
@@ -22,4 +24,8 @@ function btnFormAction(event) {
   console.log(formName.value);
   console.log(formEmail.value);
   console.log(formMessage.value);
+}
+
+function closeDiaporama() {
+  diaporamaContainer.style.display = "none";
 }
