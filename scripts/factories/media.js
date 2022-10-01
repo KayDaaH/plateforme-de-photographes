@@ -25,7 +25,7 @@ function mediaFactory(data) {
       contents.setAttribute("src", `../assets/photos/${id}/${media}`);
       contents.setAttribute("id", `${contentId}`);
       contents.setAttribute("class", `photographer-content ${(index += 1)}`);
-      contents.setAttribute("index", `${(index += 1)}`);
+      // contents.setAttribute("index", `${(index += 1)}`);
       const h2 = document.createElement("h2");
       const likes = document.createElement("likes");
       const pricePerDay = document.getElementById("pricePerDay");
@@ -51,10 +51,10 @@ function panorama() {
   contentNodelist.forEach((e) => {
     e.addEventListener("click", () => {
       const link = e.src;
-      // console.log(e);
+      console.log(e);
       console.log(e.src);
       console.log(e.id);
-      console.log(e.img);
+      console.log(e.className);
 
       const diaporamaContainer = document.querySelector(".diaporama-container");
       const slideContent = document.querySelector(".slide-content");
