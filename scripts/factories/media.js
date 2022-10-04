@@ -109,12 +109,27 @@ function plusSlides(n) {
 
 function likes() {
   const hearts = document.querySelectorAll(".like");
+  let totalLikes = 0;
+  let newLikesNumber = 0;
+  const likesContainer = document.getElementById("total-likes");
 
   hearts.forEach((e) => {
+    // ------------------Je récupère le nombre de likes
+    const likesHTML = e.parentNode;
+    let likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
+    // ------------------------
+
+    // ------------------J'ajoute un like au clic'
+
     e.addEventListener("click", () => {
-      const likesHTML = e.parentNode;
-      let likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
-      likesHTML.innerHTML = `${(likesNumber += 1)} <i class="fa-solid fa-heart like"></i>`;
+      newLikesNumber = likesNumber += 1;
+      likesHTML.innerHTML = `${newLikesNumber} <i class="fa-solid fa-heart like"></i>`;
+      totalLikes += 1;
+
+      likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
     });
+    totalLikes += likesNumber;
   });
+
+  likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
 }
