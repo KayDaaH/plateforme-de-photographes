@@ -116,7 +116,7 @@ function likes() {
   hearts.forEach((e) => {
     // ------------------Je récupère le nombre de likes
     const likesHTML = e.parentNode;
-    let likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
+    let likesNumber = Number(likesHTML.innerHTML.substring(0, 3));
     // ------------------------
 
     // ------------------J'ajoute un like au clic'
