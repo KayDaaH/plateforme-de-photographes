@@ -39,13 +39,13 @@ function mediaFactory(data) {
 
       return photographerMediaHTML;
     });
-    panorama();
+    diaporama();
   }
 
   return { photosFactoryDOM };
 }
 
-function panorama() {
+function diaporama() {
   const contentNodelist = document.querySelectorAll(".photographer-content");
 
   contentNodelist.forEach((e) => {
@@ -72,52 +72,36 @@ function panorama() {
 function plusSlides(n) {
   const contentNodelist = document.querySelectorAll(".photographer-content");
   const slideContent = document.querySelector(".slide-content");
-  const previousContent = document.getElementById("prev-less");
-  const nextContent = document.getElementById("prev-plus");
   const slideContentDiapo = document.querySelector(".slide-content-diapo");
-  const array = [...contentNodelist];
-  let indexContent = array.indexOf(slideContentDiapo.id);
-  const index = slideContentDiapo.className.slice(
+  let index = slideContentDiapo.className.slice(
     41,
     slideContentDiapo.className.length
   );
+  const nextContent = contentNodelist[index];
+  const previusContent = contentNodelist[index - 2];
+  let format = "img";
 
   if (n === 1) {
-    // console.log(nextContent);
-    console.log("--------------");
-    contentNodelist.forEach((e) => {
-      if (e.className.indexOf(index) !== -1) {
-        console.log(index);
-        console.log(e.className);
-      }
-    });
-
-    // console.log(
-    //   slideContentDiapo.className.slice(20, slideContentDiapo.className.length)
-    // );
-    // console.log(indexContent);
-    // console.log("--------------");
-    // console.log(indexContent);
-    // slideContent.innerHTML = `<img class="slide-content-panorama" id="${e.id}"src="${e.src}">`;
+    if (contentNodelist.length - 1 < Number(index) + 1) {
+      if (contentNodelist[0].src.indexOf("jpg") === -1)
+        format = "video controls";
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${contentNodelist[0].className}" id="${contentNodelist[0].id}"src="${contentNodelist[0].src}">`;
+    } else {
+      if (nextContent.src.indexOf("jpg") === -1) format = "video controls";
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${nextContent.className}" id="${nextContent.id}"src="${nextContent.src}">`;
+    }
   } else {
-    console.log(previousContent);
+    if (contentNodelist[0].id == slideContentDiapo.id) {
+      if (contentNodelist[contentNodelist.length - 2].src.indexOf("jpg") === -1)
+        format = "video controls";
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+        contentNodelist[contentNodelist.length - 2].className
+      }" id="${contentNodelist[contentNodelist.length - 2].id}"src="${
+        contentNodelist[contentNodelist.length - 2].src
+      }">`;
+    } else {
+      if (previusContent.src.indexOf("jpg") === -1) format = "video controls";
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}">`;
+    }
   }
 }
-
-// function showSlides(n) {
-//   const diaporamaContainer = document.querySelector(".diaporama-container");
-//   const slideContent = document.querySelector(".slide-content");
-
-//   if (n > diaporamaContainer.length) {
-//     slideIndex = 1;
-//   }
-//   if (n < 1) {
-//     slideIndex = diaporamaContainer.length;
-//   }
-
-//   for (let i = 0; i < diaporamaContainer.length; i++) {
-//     slides[i];
-//   }
-
-//   console.log(diaporamaContainer.length);
-// }
