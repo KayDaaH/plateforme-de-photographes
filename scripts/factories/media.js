@@ -30,7 +30,7 @@ function mediaFactory(data) {
       const likes = document.createElement("likes");
       const pricePerDay = document.getElementById("pricePerDay");
       h2.textContent = `${title}`;
-      likes.innerHTML = `${like} <i class="fa-solid fa-heart"></i>`;
+      likes.innerHTML = `${like} <i class="fa-solid fa-heart like"></i>`;
       pricePerDay.textContent = `${price}€ / jour`;
       article.appendChild(contents);
       article.appendChild(h2);
@@ -40,6 +40,7 @@ function mediaFactory(data) {
       return photographerMediaHTML;
     });
     diaporama();
+    likes();
   }
 
   return { photosFactoryDOM };
@@ -104,4 +105,16 @@ function plusSlides(n) {
       slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}">`;
     }
   }
+}
+
+function likes() {
+  const hearts = document.querySelectorAll(".like");
+
+  hearts.forEach((e) => {
+    e.addEventListener("click", () => {
+      const likesHTML = e.parentNode;
+      let likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
+      likesHTML.innerHTML = `${(likesNumber += 1)} <i class="fa-solid fa-heart like"></i>`;
+    });
+  });
 }

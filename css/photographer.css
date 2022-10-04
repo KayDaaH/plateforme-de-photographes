@@ -343,6 +343,10 @@ form input {
   transform: rotate(-45deg);
 }
 
+.like {
+  cursor: pointer;
+}
+
 /* .modal header {
   justify-content: space-between;
   width: 100%;
