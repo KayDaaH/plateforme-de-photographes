@@ -117,6 +117,11 @@ function likes() {
     // ------------------Je récupère le nombre de likes
     const likesHTML = e.parentNode;
     let likesNumber = Number(likesHTML.innerHTML.substring(0, 3));
+    if (Number.isInteger(likesNumber)) {
+    } else {
+      likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
+    }
+    console.log(likesNumber);
     // ------------------------
 
     // ------------------J'ajoute un like au clic'
