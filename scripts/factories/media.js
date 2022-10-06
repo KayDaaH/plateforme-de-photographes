@@ -121,7 +121,6 @@ function likes() {
     } else {
       likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
     }
-    console.log(likesNumber);
     // ------------------------
 
     // ------------------J'ajoute un like au clic'
