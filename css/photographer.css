@@ -358,6 +358,19 @@ form input {
 }
 
 .sort-menu {
+  position: absolute;
+  background-color: green;
+  margin-left: 10px;
+  border-radius: 5px;
+  background-color: #901c1c;
+  right: -120px;
+  top: 4px;
+  z-index: 5;
+  user-select: none;
+}
+
+.sort-choice {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -365,20 +378,46 @@ form input {
   font-weight: bold;
   color: white;
   padding: 11px 25px;
-  margin-left: 10px;
   width: 150px;
   height: 40px;
   border: none;
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
-  top: 50%;
-  left: 50%;
+}
+
+.sort-populaire {
+  border-radius: 5px 5px 5px 5px;
+}
+.sort-date {
+  border-radius: 0px;
+  display: none;
+}
+.sort-titre {
+  border-radius: 0px 0px 5px 5px;
+  display: none;
 }
 
 #arrow {
   font-size: 35px;
   transform: rotate(90deg);
+  transition: transform 0.05s ease-out;
+}
+.is-visible {
+  display: flex;
+}
+
+#arrow.active {
+  transform: rotate(-90deg);
+}
+
+.sort-ligne {
+  height: 1px;
+  width: 90%;
+  background-color: white;
+  position: absolute;
+  top: -20px;
+  left: 5%;
 }
 /* .modal header {
   justify-content: space-between;

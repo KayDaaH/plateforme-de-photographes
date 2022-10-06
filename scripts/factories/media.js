@@ -41,6 +41,7 @@ function mediaFactory(data) {
     });
     diaporama();
     likes();
+    sort();
   }
 
   return { photosFactoryDOM };
@@ -136,4 +137,16 @@ function likes() {
   });
 
   likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
+}
+
+function sort() {
+  const arrow = document.getElementById("arrow");
+  const date = document.querySelector(".sort-date");
+  const titre = document.querySelector(".sort-titre");
+  arrow.addEventListener("click", () => {
+    console.log("ok");
+    date.classList.toggle("is-visible");
+    titre.classList.toggle("is-visible");
+    arrow.classList.toggle("active");
+  });
 }
