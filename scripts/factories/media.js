@@ -149,15 +149,29 @@ function plusSlides(n) {
 
 function likes() {
   const likeContainer = document.querySelectorAll(".likes-container");
+  const likesContainer = document.getElementById("total-likes");
+
+  let totalLikes = 0;
   Array.from(likeContainer).forEach((e) => {
     const btnLike = e.children[1];
+    totalLikes += parseInt(e.children[0].value);
+    likesContainer.innerHTML = `<input type="number" id="total-like" value="${totalLikes}" name=""> <i class="fa-solid fa-heart big-heart"></i>`;
+
     btnLike.addEventListener("click", () => {
       if (btnLike.classList.contains("like-active") != true) {
         e.children[0].value = parseInt(e.children[0].value) + 1;
         btnLike.classList.add("like-active");
+        totalLikes += 1;
+        // likesContainer.innerHTML = `<input type="number" id="total-like" value="${totalLikes}" name=""> <i class="fa-solid fa-heart"></i>`;
+        console.log(parseInt(likesContainer.children[0].value));
+        likesContainer.children[0].value =
+          parseInt(likesContainer.children[0].value) + 1;
       } else {
         e.children[0].value = parseInt(e.children[0].value) - 1;
         btnLike.classList.remove("like-active");
+        totalLikes -= 1;
+        likesContainer.children[0].value =
+          parseInt(likesContainer.children[0].value) - 1;
       }
     });
   });

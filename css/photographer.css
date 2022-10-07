@@ -34,19 +34,44 @@ header {
 }
 
 #total-likes {
-  position: absolute;
-  left: 40px;
-  font-size: 23px;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
 }
 
 #infos p {
   position: absolute;
   right: 40px;
-  font-size: 23px;
+  color: black;
+  font-size: 30px;
   font-weight: bold;
+  margin: 0px;
 }
 
+#total-like {
+  pointer-events: none;
+  border: none;
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  width: 100px;
+  background: none;
+  display: flex;
+  text-align: right;
+  margin-left: 10px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.big-heart {
+  pointer-events: none;
+  border: none;
+  color: black;
+  font-size: 32px;
+  font-weight: bold;
+  width: 70px;
+  background: none;
+  display: flex;
+  align-items: center;
+}
 .photograph-header {
   position: relative;
   background-color: #fafafa;
