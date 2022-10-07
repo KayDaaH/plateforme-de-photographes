@@ -28,9 +28,13 @@ function mediaFactory(data) {
       // contents.setAttribute("index", `${(index += 1)}`);
       const h2 = document.createElement("h2");
       const likes = document.createElement("likes");
+      likes.classList.add("likes-container");
       const pricePerDay = document.getElementById("pricePerDay");
       h2.textContent = `${title}`;
-      likes.innerHTML = `${like} <i class="fa-solid fa-heart like"></i>`;
+      // likes.innerHTML = `${like} <i class="fa-solid fa-heart like"></i>`;
+
+      likes.innerHTML = `<input type="number" class="input-like" value="${like}" name=""> <i class="fa-solid fa-heart like"></i>`;
+
       pricePerDay.textContent = `${price}€ / jour`;
       article.appendChild(contents);
       article.appendChild(h2);
@@ -108,35 +112,55 @@ function plusSlides(n) {
   }
 }
 
+// function likes() {
+//   const hearts = document.querySelectorAll(".like");
+//   const nombreLikes = document.querySelector(".input-like");
+//   let totalLikes = 0;
+//   let newLikesNumber = 0;
+//   const likesContainer = document.getElementById("total-likes");
+
+//   hearts.forEach((e) => {
+//     // ------------------Je récupère le nombre de likes
+//     const likesHTML = e.parentNode;
+//     // let likesNumber = Number(likesHTML.innerHTML.substring(0, 3));
+//     let likesNumber = Number(likesHTML.innerHTML.substring(0, 3));
+//     console.log(likesNumber);
+//     console.log(nombreLikes.value);
+//     if (Number.isInteger(likesNumber)) {
+//     } else {
+//       likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
+//     }
+//     // ------------------------
+
+//     // ------------------J'ajoute un like au clic'
+
+//     e.addEventListener("click", () => {
+//       newLikesNumber = likesNumber += 1;
+//       likesHTML.innerHTML = `${newLikesNumber} <i class="fa-solid fa-heart like"></i>`;
+//       totalLikes += 1;
+
+//       likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
+//     });
+//     totalLikes += likesNumber;
+//   });
+
+//   likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
+// }
+
 function likes() {
-  const hearts = document.querySelectorAll(".like");
-  let totalLikes = 0;
-  let newLikesNumber = 0;
-  const likesContainer = document.getElementById("total-likes");
-
-  hearts.forEach((e) => {
-    // ------------------Je récupère le nombre de likes
-    const likesHTML = e.parentNode;
-    let likesNumber = Number(likesHTML.innerHTML.substring(0, 3));
-    if (Number.isInteger(likesNumber)) {
-    } else {
-      likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
-    }
-    // ------------------------
-
-    // ------------------J'ajoute un like au clic'
-
-    e.addEventListener("click", () => {
-      newLikesNumber = likesNumber += 1;
-      likesHTML.innerHTML = `${newLikesNumber} <i class="fa-solid fa-heart like"></i>`;
-      totalLikes += 1;
-
-      likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
+  const likeContainer = document.querySelectorAll(".likes-container");
+  Array.from(likeContainer).forEach((e) => {
+    const btnLike = e.children[1];
+    btnLike.addEventListener("click", () => {
+      if (btnLike.classList.contains("like-active") != true) {
+        e.children[0].value = parseInt(e.children[0].value) + 1;
+        btnLike.classList.add("like-active");
+      } else {
+        e.children[0].value = parseInt(e.children[0].value) - 1;
+        btnLike.classList.remove("like-active");
+      }
     });
-    totalLikes += likesNumber;
   });
-
-  likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
 }
 
 function sort() {

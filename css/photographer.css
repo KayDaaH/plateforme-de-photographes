@@ -345,10 +345,6 @@ form input {
   transform: rotate(-45deg);
 }
 
-.like {
-  cursor: pointer;
-}
-
 .sort-container {
   display: flex;
   align-items: center;
@@ -419,6 +415,35 @@ form input {
   position: absolute;
   top: -20px;
   left: 5%;
+}
+
+.likes-container {
+  position: absolute;
+  bottom: -100px;
+}
+.input-like {
+  pointer-events: none;
+  border: none;
+  color: #c23211;
+  font-size: 25px;
+  font-weight: bold;
+  right: 15px;
+  position: absolute;
+  bottom: -3px;
+  width: 70px;
+  background: none;
+  display: flex;
+  justify-content: right;
+  text-align: right;
+}
+
+.like {
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  bottom: 2px;
+  left: -25px;
+  font-size: 25px;
 }
 /* .modal header {
   justify-content: space-between;
