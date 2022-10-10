@@ -1,6 +1,5 @@
 function mediaFactory(data) {
   const photographerMedias = data;
-  console.log(photographerMedias);
 
   function photosFactoryDOM() {
     let index = 0;
@@ -43,7 +42,7 @@ function mediaFactory(data) {
 
       return photographerMediaHTML;
     });
-    diaporama();
+    diaporama(photographerMedias);
     likes();
     sort();
   }
@@ -51,52 +50,154 @@ function mediaFactory(data) {
   return { photosFactoryDOM };
 }
 
-function diaporama() {
+function diaporama(data) {
   const contentNodelist = document.querySelectorAll(".photographer-content");
-
+  let title;
   contentNodelist.forEach((e) => {
     e.addEventListener("click", () => {
       const link = e.src;
-      console.log(e.className);
+      const id = e.id;
+
+      data.forEach((e) => {
+        if (id == e.id) {
+          title = e.title;
+        }
+      });
 
       const diaporamaContainer = document.querySelector(".diaporama-container");
       const slideContent = document.querySelector(".slide-content");
+      const slideTitle = document.querySelector(".content-title");
+
       if (link.indexOf("jpg") !== -1) {
-        slideContent.innerHTML = `<img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}">`;
+        slideContent.innerHTML = `<img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}"> <p class="slide-content-title">bonjour</p>`;
         diaporamaContainer.style.display = "block";
+        const content = document.querySelector(".slide-content-diapo");
+        const title = document.querySelector(".slide-content-title");
+        console.log(content);
+        let offSetLeft = content.offsetLeft;
+        let offSetHeight = content.offsetHeight - 20;
+        let heightContent = slideContent.offsetHeight;
+        if (offSetHeight != heightContent - 20) offSetHeight += 40;
+
+        console.log(offSetLeft);
+        console.log(offSetHeight);
+        title.style.left = offSetLeft + "px";
+        title.style.top = offSetHeight + "px";
       } else {
         slideContent.innerHTML = `<video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}"></video>`;
         diaporamaContainer.style.display = "block";
       }
+      slideTitle.innerHTML = `<p> ${title} </p>`;
     });
   });
+  // const content = document.querySelector(".slide-content-diapo");
+  // console.log(content);
+  // let variable = content.offsetLeft;
+  // console.log(variable);
+  plusSlides(data);
+  lessSlides(data);
 }
 
-// let slideIndex = 1;
-// showSlides(slideIndex);
+// function plusSlides(n) {
+//   const /* A NodeList of all the elements with the class `photographer-content`. */
+//     contentNodelist = document.querySelectorAll(".photographer-content");
+//   const slideContent = document.querySelector(".slide-content");
+//   const slideContentDiapo = document.querySelector(".slide-content-diapo");
+//   let index = slideContentDiapo.className.slice(
+//     41,
+//     slideContentDiapo.className.length
+//   );
+//   const id = parseInt(slideContentDiapo.id);
+//   let title;
+
+//   contentNodelist.forEach((e) => {
+//     if (id == e.id) {
+//       title = e.title;
+//     }
+//   });
+//   console.log(contentNodelist);
+
+//   const nextContent = contentNodelist[index];
+//   const previusContent = contentNodelist[index - 2];
+//   let format = "img";
+
+//   if (n === 1) {
+//     if (contentNodelist.length - 1 < Number(index) + 1) {
+//       if (contentNodelist[0].src.indexOf("jpg") === -1)
+//         format = "video controls";
+//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${contentNodelist[0].className}" id="${contentNodelist[0].id}"src="${contentNodelist[0].src}">`;
+//     } else {
+//       if (nextContent.src.indexOf("jpg") === -1) format = "video controls";
+//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${nextContent.className}" id="${nextContent.id}"src="${nextContent.src}">`;
+//     }
+//   } else {
+//     if (contentNodelist[0].id == slideContentDiapo.id) {
+//       if (contentNodelist[contentNodelist.length - 2].src.indexOf("jpg") === -1)
+//         format = "video controls";
+//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+//         contentNodelist[contentNodelist.length - 2].className
+//       }" id="${contentNodelist[contentNodelist.length - 2].id}"src="${
+//         contentNodelist[contentNodelist.length - 2].src
+//       }">`;
+//     } else {
+//       if (previusContent.src.indexOf("jpg") === -1) format = "video controls";
+//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}">`;
+//     }
+//   }
+// }
 
 function plusSlides(n) {
-  const contentNodelist = document.querySelectorAll(".photographer-content");
-  const slideContent = document.querySelector(".slide-content");
-  const slideContentDiapo = document.querySelector(".slide-content-diapo");
-  let index = slideContentDiapo.className.slice(
-    41,
-    slideContentDiapo.className.length
-  );
-  const nextContent = contentNodelist[index];
-  const previusContent = contentNodelist[index - 2];
-  let format = "img";
+  const icon = document.getElementById("prev-plus");
+  icon.addEventListener("click", () => {
+    const /* A NodeList of all the elements with the class `photographer-content`. */
+      contentNodelist = document.querySelectorAll(".photographer-content");
+    const slideContent = document.querySelector(".slide-content");
+    const slideContentDiapo = document.querySelector(".slide-content-diapo");
+    const slideTitle = document.querySelector(".content-title");
+    let index = slideContentDiapo.className.slice(
+      41,
+      slideContentDiapo.className.length
+    );
+    let title;
 
-  if (n === 1) {
+    const nextContent = contentNodelist[index];
+    let format = "img";
+
     if (contentNodelist.length - 1 < Number(index) + 1) {
       if (contentNodelist[0].src.indexOf("jpg") === -1)
         format = "video controls";
       slideContent.innerHTML = `<${format} class="slide-content-diapo ${contentNodelist[0].className}" id="${contentNodelist[0].id}"src="${contentNodelist[0].src}">`;
+      title = n[0].title;
     } else {
       if (nextContent.src.indexOf("jpg") === -1) format = "video controls";
       slideContent.innerHTML = `<${format} class="slide-content-diapo ${nextContent.className}" id="${nextContent.id}"src="${nextContent.src}">`;
+      title = n[index].title;
     }
-  } else {
+    slideTitle.innerHTML = `<p> ${title} </p>`;
+    slideContentDiapo.innerHTML = `<p> ${title} </p>`;
+  });
+}
+
+function lessSlides(n) {
+  const icon = document.getElementById("prev-less");
+  icon.addEventListener("click", () => {
+    const /* A NodeList of all the elements with the class `photographer-content`. */
+      contentNodelist = document.querySelectorAll(".photographer-content");
+    const slideContent = document.querySelector(".slide-content");
+    const slideContentDiapo = document.querySelector(".slide-content-diapo");
+    const slideTitle = document.querySelector(".content-title");
+    let index = slideContentDiapo.className.slice(
+      41,
+      slideContentDiapo.className.length
+    );
+    let title;
+    console.log(n[n.length - 1]);
+
+    const previusContent = contentNodelist[index - 2];
+    let format = "img";
+    console.log(contentNodelist[0].id);
+    console.log(slideContentDiapo.id);
+
     if (contentNodelist[0].id == slideContentDiapo.id) {
       if (contentNodelist[contentNodelist.length - 2].src.indexOf("jpg") === -1)
         format = "video controls";
@@ -105,47 +206,15 @@ function plusSlides(n) {
       }" id="${contentNodelist[contentNodelist.length - 2].id}"src="${
         contentNodelist[contentNodelist.length - 2].src
       }">`;
+      title = n[n.length - 1].title;
     } else {
       if (previusContent.src.indexOf("jpg") === -1) format = "video controls";
       slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}">`;
+      title = n[index - 2].title;
     }
-  }
+    slideTitle.innerHTML = `<p> ${title} </p>`;
+  });
 }
-
-// function likes() {
-//   const hearts = document.querySelectorAll(".like");
-//   const nombreLikes = document.querySelector(".input-like");
-//   let totalLikes = 0;
-//   let newLikesNumber = 0;
-//   const likesContainer = document.getElementById("total-likes");
-
-//   hearts.forEach((e) => {
-//     // ------------------Je récupère le nombre de likes
-//     const likesHTML = e.parentNode;
-//     // let likesNumber = Number(likesHTML.innerHTML.substring(0, 3));
-//     let likesNumber = Number(likesHTML.innerHTML.substring(0, 3));
-//     console.log(likesNumber);
-//     console.log(nombreLikes.value);
-//     if (Number.isInteger(likesNumber)) {
-//     } else {
-//       likesNumber = Number(likesHTML.innerHTML.substring(0, 2));
-//     }
-//     // ------------------------
-
-//     // ------------------J'ajoute un like au clic'
-
-//     e.addEventListener("click", () => {
-//       newLikesNumber = likesNumber += 1;
-//       likesHTML.innerHTML = `${newLikesNumber} <i class="fa-solid fa-heart like"></i>`;
-//       totalLikes += 1;
-
-//       likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
-//     });
-//     totalLikes += likesNumber;
-//   });
-
-//   likesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i></div>`;
-// }
 
 function likes() {
   const likeContainer = document.querySelectorAll(".likes-container");
@@ -179,9 +248,10 @@ function likes() {
 
 function sort() {
   const arrow = document.getElementById("arrow");
+  const popularite = document.querySelector(".sort-populaire");
   const date = document.querySelector(".sort-date");
   const titre = document.querySelector(".sort-titre");
-  arrow.addEventListener("click", () => {
+  popularite.addEventListener("click", () => {
     console.log("ok");
     date.classList.toggle("is-visible");
     titre.classList.toggle("is-visible");

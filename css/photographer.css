@@ -335,6 +335,7 @@ form input {
   color: #901c1c;
   font-size: 45px;
   cursor: pointer;
+  user-select: none;
 }
 
 /* .close-slide {
@@ -469,6 +470,18 @@ form input {
   position: absolute;
   bottom: 2px;
   left: -25px;
+  font-size: 25px;
+}
+
+.content-title {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+.slide-content-title {
+  position: absolute;
+  color: #901c1c;
+  font-weight: bold;
   font-size: 25px;
 }
 /* .modal header {
