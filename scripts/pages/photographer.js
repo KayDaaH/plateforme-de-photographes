@@ -38,8 +38,15 @@ async function mediaData(media) {
       PhotographerMedias.push(item);
     }
   });
+  PhotographerMedias.sort((a, b) => {
+    let aLikes = a.likes;
+    let bLikes = b.likes;
+    return bLikes - aLikes;
+  });
+
   const photographerMediaOk = mediaFactory(PhotographerMedias);
   const mediaCardDOM = photographerMediaOk.photosFactoryDOM();
+  // sort(PhotographerMedias);
 }
 
 // async function getPictures() {

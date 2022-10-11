@@ -1,5 +1,7 @@
 function mediaFactory(data) {
   const photographerMedias = data;
+  console.log("hello");
+  console.log(photographerMedias);
 
   function photosFactoryDOM() {
     let index = 0;
@@ -44,7 +46,7 @@ function mediaFactory(data) {
     });
     diaporama(photographerMedias);
     likes();
-    sort();
+    sortContent(photographerMedias);
   }
 
   return { photosFactoryDOM };
@@ -208,7 +210,7 @@ function likes() {
   });
 }
 
-function sort() {
+function sortContent(n) {
   const arrow1 = document.getElementById("arrow1");
   const arrow2 = document.getElementById("arrow2");
   const arrow3 = document.getElementById("arrow3");
@@ -217,28 +219,90 @@ function sort() {
   const popularite = document.querySelector(".sort-populaire");
   const date = document.querySelector(".sort-date");
   const titre = document.querySelector(".sort-titre");
+  const testttt = document.querySelector(".photos-factory");
+  let contentSort = n;
+  console.log(testttt);
+  // mediaFactory(contentSort);
+
   popularite.addEventListener("click", () => {
-    console.log("popularité");
     date.classList.toggle("is-visible");
     titre.classList.toggle("is-visible");
     arrow1.classList.toggle("active");
     arrow2.classList.add("is-hidden");
     arrow3.classList.add("is-hidden");
+    // contentSort.sort((a, b) => {
+    //   let aLikes = a.likes;
+    //   let bLikes = b.likes;
+    //   return bLikes - aLikes;
+    // });
+    console.log("bubulle");
   });
   date.addEventListener("click", () => {
-    console.log("date");
-
     popularite.classList.toggle("is-hidden");
     titre.classList.toggle("is-visible");
     arrow2.classList.toggle("is-hidden");
     ligne2.classList.toggle("is-hidden");
+    // contentSort.sort((a, b) => {
+    //   let aLikes = a.likes;
+    //   let bLikes = b.likes;
+    //   return bLikes - aLikes;
+    // });
   });
   titre.addEventListener("click", () => {
-    console.log("titre");
     popularite.classList.toggle("is-hidden");
     date.classList.toggle("is-visible");
     arrow3.classList.toggle("is-hidden");
     ligne3.classList.toggle("is-hidden");
+    contentSort.sort((a, b) => {
+      let aLow = a.title;
+      let bLow = b.title;
+      if (aLow < bLow) return -1;
+      if (aLow > bLow) return 1;
+      if (aLow === bLow) return 0;
+    });
+    let index = 0;
+    const photographerMediaHTML = document.querySelector(".photos-factory");
+    photographerMediaHTML.innerHTML = "";
+    contentSort.forEach((item) => {
+      const title = item.title;
+      const price = item.price;
+      const id = item.photographerId;
+      const contentId = item.id;
+      const like = item.likes;
+      const article = document.createElement("article");
+      let contents;
+      let media;
+      if (item.image) {
+        contents = document.createElement("img");
+        media = item.image;
+      } else {
+        contents = document.createElement("video");
+        media = item.video;
+      }
+      // console.log(contentId.toString().length);
+      contents.setAttribute("src", `../assets/photos/${id}/${media}`);
+      contents.setAttribute("id", `${contentId}`);
+      contents.setAttribute("class", `photographer-content ${(index += 1)}`);
+      // contents.setAttribute("index", `${(index += 1)}`);
+      const h2 = document.createElement("h2");
+      const likes = document.createElement("likes");
+      likes.classList.add("likes-container");
+      const pricePerDay = document.getElementById("pricePerDay");
+      h2.textContent = `${title}`;
+      // likes.innerHTML = `${like} <i class="fa-solid fa-heart like"></i>`;
+
+      likes.innerHTML = `<input type="number" class="input-like" value="${like}" name=""> <i class="fa-solid fa-heart like"></i>`;
+
+      pricePerDay.textContent = `${price}€ / jour`;
+      article.appendChild(contents);
+      article.appendChild(h2);
+      article.appendChild(likes);
+      photographerMediaHTML.appendChild(article);
+
+      return photographerMediaHTML;
+    });
+    diaporama(contentSort);
+    likes();
   });
 }
 
