@@ -484,6 +484,14 @@ form input {
   font-weight: bold;
   font-size: 25px;
 }
+.slide-content-title-video {
+  position: absolute;
+  color: #901c1c;
+  font-weight: bold;
+  font-size: 25px;
+  bottom: 40px;
+  left: 168px;
+}
 /* .modal header {
   justify-content: space-between;
   width: 100%;

@@ -86,64 +86,11 @@ function diaporama(data) {
         slideContent.innerHTML = `<video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}"></video> <p class="slide-content-title-video">${titleContent}</p>`;
         diaporamaContainer.style.display = "block";
       }
-      // slideTitle.innerHTML = `<p> ${title} </p>`;
     });
   });
-  // const content = document.querySelector(".slide-content-diapo");
-  // console.log(content);
-  // let variable = content.offsetLeft;
-  // console.log(variable);
   plusSlides(data);
   lessSlides(data);
 }
-
-// function plusSlides(n) {
-//   const /* A NodeList of all the elements with the class `photographer-content`. */
-//     contentNodelist = document.querySelectorAll(".photographer-content");
-//   const slideContent = document.querySelector(".slide-content");
-//   const slideContentDiapo = document.querySelector(".slide-content-diapo");
-//   let index = slideContentDiapo.className.slice(
-//     41,
-//     slideContentDiapo.className.length
-//   );
-//   const id = parseInt(slideContentDiapo.id);
-//   let title;
-
-//   contentNodelist.forEach((e) => {
-//     if (id == e.id) {
-//       title = e.title;
-//     }
-//   });
-//   console.log(contentNodelist);
-
-//   const nextContent = contentNodelist[index];
-//   const previusContent = contentNodelist[index - 2];
-//   let format = "img";
-
-//   if (n === 1) {
-//     if (contentNodelist.length - 1 < Number(index) + 1) {
-//       if (contentNodelist[0].src.indexOf("jpg") === -1)
-//         format = "video controls";
-//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${contentNodelist[0].className}" id="${contentNodelist[0].id}"src="${contentNodelist[0].src}">`;
-//     } else {
-//       if (nextContent.src.indexOf("jpg") === -1) format = "video controls";
-//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${nextContent.className}" id="${nextContent.id}"src="${nextContent.src}">`;
-//     }
-//   } else {
-//     if (contentNodelist[0].id == slideContentDiapo.id) {
-//       if (contentNodelist[contentNodelist.length - 2].src.indexOf("jpg") === -1)
-//         format = "video controls";
-//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${
-//         contentNodelist[contentNodelist.length - 2].className
-//       }" id="${contentNodelist[contentNodelist.length - 2].id}"src="${
-//         contentNodelist[contentNodelist.length - 2].src
-//       }">`;
-//     } else {
-//       if (previusContent.src.indexOf("jpg") === -1) format = "video controls";
-//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}">`;
-//     }
-//   }
-// }
 
 function plusSlides(n) {
   const icon = document.getElementById("prev-plus");
@@ -152,28 +99,36 @@ function plusSlides(n) {
       contentNodelist = document.querySelectorAll(".photographer-content");
     const slideContent = document.querySelector(".slide-content");
     const slideContentDiapo = document.querySelector(".slide-content-diapo");
-    const slideTitle = document.querySelector(".content-title");
     let index = slideContentDiapo.className.slice(
       41,
       slideContentDiapo.className.length
     );
-    let title;
+    let titleContent;
 
     const nextContent = contentNodelist[index];
     let format = "img";
+    let formatEnd = "img";
+    let classContent = "slide-content-title";
 
     if (contentNodelist.length - 1 < Number(index) + 1) {
-      if (contentNodelist[0].src.indexOf("jpg") === -1)
+      if (contentNodelist[0].src.indexOf("jpg") === -1) {
         format = "video controls";
-      slideContent.innerHTML = `<${format} class="slide-content-diapo ${contentNodelist[0].className}" id="${contentNodelist[0].id}"src="${contentNodelist[0].src}">`;
-      title = n[0].title;
+        formatEnd = "video";
+        classContent = "slide-content-title-video";
+      }
+      titleContent = n[0].title;
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${contentNodelist[0].className}" id="${contentNodelist[0].id}"src="${contentNodelist[0].src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+      title();
     } else {
-      if (nextContent.src.indexOf("jpg") === -1) format = "video controls";
-      slideContent.innerHTML = `<${format} class="slide-content-diapo ${nextContent.className}" id="${nextContent.id}"src="${nextContent.src}">`;
-      title = n[index].title;
+      if (nextContent.src.indexOf("jpg") === -1) {
+        format = "video controls";
+        formatEnd = "video";
+        classContent = "slide-content-title-video";
+      }
+      titleContent = n[index].title;
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${nextContent.className}" id="${nextContent.id}"src="${nextContent.src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+      title();
     }
-    slideTitle.innerHTML = `<p> ${title} </p>`;
-    slideContentDiapo.innerHTML = `<p> ${title} </p>`;
   });
 }
 
@@ -184,34 +139,42 @@ function lessSlides(n) {
       contentNodelist = document.querySelectorAll(".photographer-content");
     const slideContent = document.querySelector(".slide-content");
     const slideContentDiapo = document.querySelector(".slide-content-diapo");
-    const slideTitle = document.querySelector(".content-title");
     let index = slideContentDiapo.className.slice(
       41,
       slideContentDiapo.className.length
     );
-    let title;
-    console.log(n[n.length - 1]);
+    let titleContent;
 
     const previusContent = contentNodelist[index - 2];
     let format = "img";
-    console.log(contentNodelist[0].id);
-    console.log(slideContentDiapo.id);
+    let formatEnd = "img";
+    let classContent = "slide-content-title";
 
     if (contentNodelist[0].id == slideContentDiapo.id) {
-      if (contentNodelist[contentNodelist.length - 2].src.indexOf("jpg") === -1)
+      if (
+        contentNodelist[contentNodelist.length - 2].src.indexOf("jpg") === -1
+      ) {
         format = "video controls";
+        formatEnd = "video";
+        classContent = "slide-content-title-video";
+      }
+      titleContent = n[n.length - 1].title;
       slideContent.innerHTML = `<${format} class="slide-content-diapo ${
         contentNodelist[contentNodelist.length - 2].className
       }" id="${contentNodelist[contentNodelist.length - 2].id}"src="${
         contentNodelist[contentNodelist.length - 2].src
-      }">`;
-      title = n[n.length - 1].title;
+      }"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+      title();
     } else {
-      if (previusContent.src.indexOf("jpg") === -1) format = "video controls";
-      slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}">`;
-      title = n[index - 2].title;
+      if (previusContent.src.indexOf("jpg") === -1) {
+        format = "video controls";
+        formatEnd = "video";
+        classContent = "slide-content-title-video";
+      }
+      titleContent = n[index - 2].title;
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+      title();
     }
-    slideTitle.innerHTML = `<p> ${title} </p>`;
   });
 }
 
@@ -256,4 +219,23 @@ function sort() {
     titre.classList.toggle("is-visible");
     arrow.classList.toggle("active");
   });
+}
+
+function title() {
+  const slideContent = document.querySelector(".slide-content");
+  const content = document.querySelector(".slide-content-diapo");
+  let title;
+  if (slideContent.children[1].className == "slide-content-title") {
+    title = document.querySelector(".slide-content-title");
+    let offSetLeft = content.offsetLeft;
+    let offSetHeight = content.offsetHeight - 20;
+    let heightContent = slideContent.offsetHeight;
+
+    if (offSetHeight == 737) offSetHeight += 70;
+    if (offSetHeight == 821) offSetHeight += 30;
+    if (offSetHeight != heightContent - 20) offSetHeight += 40;
+
+    title.style.left = offSetLeft + "px";
+    title.style.top = offSetHeight + "px";
+  }
 }
