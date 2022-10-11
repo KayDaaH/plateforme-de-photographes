@@ -411,31 +411,57 @@ form input {
 }
 
 .sort-populaire {
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 5px;
 }
 .sort-date {
-  border-radius: 0px;
+  border-radius: 5px;
   display: none;
 }
 .sort-titre {
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 5px;
   display: none;
 }
 
-#arrow {
+#arrow1 {
   font-size: 35px;
   transform: rotate(90deg);
   transition: transform 0.05s ease-out;
 }
+#arrow1.active {
+  transform: rotate(-90deg);
+}
+#arrow2 {
+  font-size: 35px;
+  transform: rotate(90deg);
+  transition: transform 0.05s ease-out;
+}
+#arrow2.active {
+  transform: rotate(-90deg);
+}
+#arrow3 {
+  font-size: 35px;
+  transform: rotate(90deg);
+  transition: transform 0.05s ease-out;
+}
+#arrow3.active {
+  transform: rotate(-90deg);
+}
 .is-visible {
   display: flex;
 }
-
-#arrow.active {
-  transform: rotate(-90deg);
+.is-hidden {
+  display: none;
 }
 
-.sort-ligne {
+#sort-ligne2 {
+  height: 1px;
+  width: 90%;
+  background-color: white;
+  position: absolute;
+  top: -20px;
+  left: 5%;
+}
+#sort-ligne3 {
   height: 1px;
   width: 90%;
   background-color: white;

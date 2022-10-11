@@ -209,15 +209,36 @@ function likes() {
 }
 
 function sort() {
-  const arrow = document.getElementById("arrow");
+  const arrow1 = document.getElementById("arrow1");
+  const arrow2 = document.getElementById("arrow2");
+  const arrow3 = document.getElementById("arrow3");
+  const ligne2 = document.getElementById("sort-ligne2");
+  const ligne3 = document.getElementById("sort-ligne3");
   const popularite = document.querySelector(".sort-populaire");
   const date = document.querySelector(".sort-date");
   const titre = document.querySelector(".sort-titre");
   popularite.addEventListener("click", () => {
-    console.log("ok");
+    console.log("popularité");
     date.classList.toggle("is-visible");
     titre.classList.toggle("is-visible");
-    arrow.classList.toggle("active");
+    arrow1.classList.toggle("active");
+    arrow2.classList.add("is-hidden");
+    arrow3.classList.add("is-hidden");
+  });
+  date.addEventListener("click", () => {
+    console.log("date");
+
+    popularite.classList.toggle("is-hidden");
+    titre.classList.toggle("is-visible");
+    arrow2.classList.toggle("is-hidden");
+    ligne2.classList.toggle("is-hidden");
+  });
+  titre.addEventListener("click", () => {
+    console.log("titre");
+    popularite.classList.toggle("is-hidden");
+    date.classList.toggle("is-visible");
+    arrow3.classList.toggle("is-hidden");
+    ligne3.classList.toggle("is-hidden");
   });
 }
 
