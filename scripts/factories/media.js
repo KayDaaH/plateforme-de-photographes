@@ -67,27 +67,26 @@ function diaporama(data) {
       const diaporamaContainer = document.querySelector(".diaporama-container");
       const slideContent = document.querySelector(".slide-content");
       const slideTitle = document.querySelector(".content-title");
+      const titleContent = title;
 
       if (link.indexOf("jpg") !== -1) {
-        slideContent.innerHTML = `<img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}"> <p class="slide-content-title">bonjour</p>`;
+        slideContent.innerHTML = `<img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}"> <p class="slide-content-title">${titleContent}</p>`;
         diaporamaContainer.style.display = "block";
         const content = document.querySelector(".slide-content-diapo");
         const title = document.querySelector(".slide-content-title");
-        console.log(content);
+
         let offSetLeft = content.offsetLeft;
         let offSetHeight = content.offsetHeight - 20;
         let heightContent = slideContent.offsetHeight;
         if (offSetHeight != heightContent - 20) offSetHeight += 40;
 
-        console.log(offSetLeft);
-        console.log(offSetHeight);
         title.style.left = offSetLeft + "px";
         title.style.top = offSetHeight + "px";
       } else {
-        slideContent.innerHTML = `<video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}"></video>`;
+        slideContent.innerHTML = `<video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}"></video> <p class="slide-content-title-video">${titleContent}</p>`;
         diaporamaContainer.style.display = "block";
       }
-      slideTitle.innerHTML = `<p> ${title} </p>`;
+      // slideTitle.innerHTML = `<p> ${title} </p>`;
     });
   });
   // const content = document.querySelector(".slide-content-diapo");
