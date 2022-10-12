@@ -1,48 +1,88 @@
+const photosFactory = document.querySelector(".photos-factory");
+
 function mediaFactory(data) {
   const photographerMedias = data;
-  console.log("hello");
-  console.log(photographerMedias);
+  console.log(data);
+
+  // function photosFactoryDOM() {
+  //   let index = 0;
+  //   photographerMedias.forEach((item) => {
+  //     const photographerMediaHTML = document.querySelector(".photos-factory");
+  //     const title = item.title;
+  //     const price = item.price;
+  //     const id = item.photographerId;
+  //     const contentId = item.id;
+  //     const like = item.likes;
+  //     const article = document.createElement("article");
+  //     let contents;
+  //     let media;
+  //     if (item.image) {
+  //       contents = document.createElement("img");
+  //       media = item.image;
+  //     } else {
+  //       contents = document.createElement("video");
+  //       media = item.video;
+  //     }
+  //     // console.log(contentId.toString().length);
+  //     contents.setAttribute("src", `../assets/photos/${id}/${media}`);
+  //     contents.setAttribute("id", `${contentId}`);
+  //     contents.setAttribute("class", `photographer-content ${(index += 1)}`);
+  //     // contents.setAttribute("index", `${(index += 1)}`);
+  //     const h2 = document.createElement("h2");
+  //     const likes = document.createElement("likes");
+  //     likes.classList.add("likes-container");
+  //     const pricePerDay = document.getElementById("pricePerDay");
+  //     h2.textContent = `${title}`;
+  //     // likes.innerHTML = `${like} <i class="fa-solid fa-heart like"></i>`;
+
+  //     likes.innerHTML = `<input type="number" class="input-like" value="${like}" name=""> <i class="fa-solid fa-heart like"></i>`;
+
+  //     pricePerDay.textContent = `${price}€ / jour`;
+  //     article.appendChild(contents);
+  //     article.appendChild(h2);
+  //     article.appendChild(likes);
+  //     photographerMediaHTML.appendChild(article);
+
+  //     return photographerMediaHTML;
+  //   });
+  //   diaporama(photographerMedias);
+  //   likes();
+  //   sortContent(photographerMedias);
+  // }
 
   function photosFactoryDOM() {
     let index = 0;
     photographerMedias.forEach((item) => {
-      const photographerMediaHTML = document.querySelector(".photos-factory");
+      const photosFactory = document.querySelector(".photos-factory");
+      const id = item.id;
+      const photographerId = item.photographerId;
       const title = item.title;
+      const likes = item.likes;
       const price = item.price;
-      const id = item.photographerId;
-      const contentId = item.id;
-      const like = item.likes;
       const article = document.createElement("article");
-      let contents;
-      let media;
+      photosFactory.appendChild(article);
+
       if (item.image) {
-        contents = document.createElement("img");
+        type = "img";
         media = item.image;
       } else {
-        contents = document.createElement("video");
         media = item.video;
+        type = "video";
       }
-      // console.log(contentId.toString().length);
-      contents.setAttribute("src", `../assets/photos/${id}/${media}`);
-      contents.setAttribute("id", `${contentId}`);
-      contents.setAttribute("class", `photographer-content ${(index += 1)}`);
-      // contents.setAttribute("index", `${(index += 1)}`);
-      const h2 = document.createElement("h2");
-      const likes = document.createElement("likes");
-      likes.classList.add("likes-container");
+      article.innerHTML = `
+      <article content-id = "${id}" photographer-id = "${photographerId}" title = "${title}" likes = "${likes}" price = "${price}" type = "${type}">;
+          <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}"></${type}>
+          <h2>${title}</h2>
+          <likes class="likes-container">
+              <input type="number" class="input-like" value="${likes}" name="">
+              <i class="fa-solid fa-heart like"></i>
+          </likes>
+      </article>`;
+
       const pricePerDay = document.getElementById("pricePerDay");
-      h2.textContent = `${title}`;
-      // likes.innerHTML = `${like} <i class="fa-solid fa-heart like"></i>`;
-
-      likes.innerHTML = `<input type="number" class="input-like" value="${like}" name=""> <i class="fa-solid fa-heart like"></i>`;
-
       pricePerDay.textContent = `${price}€ / jour`;
-      article.appendChild(contents);
-      article.appendChild(h2);
-      article.appendChild(likes);
-      photographerMediaHTML.appendChild(article);
 
-      return photographerMediaHTML;
+      return photosFactory;
     });
     diaporama(photographerMedias);
     likes();
@@ -57,35 +97,80 @@ function diaporama(data) {
   let title;
   contentNodelist.forEach((e) => {
     e.addEventListener("click", () => {
+      console.log(e);
       const link = e.src;
       const id = e.id;
-
       data.forEach((e) => {
         if (id == e.id) {
           title = e.title;
         }
       });
-
       const diaporamaContainer = document.querySelector(".diaporama-container");
       const slideContent = document.querySelector(".slide-content");
       const slideTitle = document.querySelector(".content-title");
       const titleContent = title;
-
       if (link.indexOf("jpg") !== -1) {
-        slideContent.innerHTML = `<img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}"> <p class="slide-content-title">${titleContent}</p>`;
+        slideContent.innerHTML = `
+        <div class="slide-content-container">
+            <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}"> 
+            <p class="slide-content-title">${titleContent}</p>
+        </div>`;
         diaporamaContainer.style.display = "block";
         const content = document.querySelector(".slide-content-diapo");
         const title = document.querySelector(".slide-content-title");
+        const slideContentContainer = document.querySelector(
+          "slide-content-container"
+        );
+        // function elementPosition(a) {
+        //   var b = a.getBoundingClientRect();
+        //   return {
+        //     clientX: a.offsetLeft,
+        //     clientY: a.offsetTop,
+        //     viewportX: b.x || b.left,
+        //     viewportY: b.y || b.top,
+        //   };
+        // }
+        // const photo = document.getElementById(`${id}`);
+        // let positionContent = elementPosition(photo);
 
-        let offSetLeft = content.offsetLeft;
-        let offSetHeight = content.offsetHeight - 20;
-        let heightContent = slideContent.offsetHeight;
-        if (offSetHeight != heightContent - 20) offSetHeight += 40;
+        // const Positionhorizontalefenêtre = positionContent.clientX;
+        // const Positionverticalefenêtre = positionContent.clientY;
+        // const Positionhorizontaledocument = positionContent.viewportX;
+        // const Positionverticaledocument = positionContent.viewportY;
 
-        title.style.left = offSetLeft + "px";
-        title.style.top = offSetHeight + "px";
+        // let offSetLeft = content.offsetLeft;
+        // let offSetHeight = content.offsetHeight - 20;
+        // let heightContent = slideContent.offsetHeight;
+        // if (offSetHeight != heightContent - 20) offSetHeight += 40;
+
+        // console.log();
+
+        // title.style.left = offSetLeft + "px";
+        // title.style.top = offSetHeight + "px";
+
+        // console.log(id);
+        // const photo = document.getElementById(`${id}`);
+        // let idHeight = photo.clientHeight;
+        // console.log(idHeight);
+        // let contentHeight = content.clientHeight;
+        // console.log(contentHeight);
+        // let contentWidth = content.clientWidth;
+        // console.log(contentWidth);
+
+        // slideContentContainer.style.minHeight = contentHeight + "px";
+
+        // let offSetLeft = content.offsetLeft;
+        // let offSetHeight = content.offsetHeight - 20;
+        // let heightContent = slideContent.offsetHeight;
+        // if (offSetHeight != heightContent - 20) offSetHeight += 40;
+        // title.style.left = offSetLeft + "px";
+        // title.style.top = offSetHeight + "px";
       } else {
-        slideContent.innerHTML = `<video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}"></video> <p class="slide-content-title-video">${titleContent}</p>`;
+        slideContent.innerHTML = `
+        <div class="slide-content-container">
+            <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}"></video> 
+            <p class="slide-content-title-video">${titleContent}</p>;
+        </div>`;
         diaporamaContainer.style.display = "block";
       }
     });
@@ -120,7 +205,7 @@ function plusSlides(n) {
       }
       titleContent = n[0].title;
       slideContent.innerHTML = `<${format} class="slide-content-diapo ${contentNodelist[0].className}" id="${contentNodelist[0].id}"src="${contentNodelist[0].src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
-      title();
+      // title();
     } else {
       if (nextContent.src.indexOf("jpg") === -1) {
         format = "video controls";
@@ -129,7 +214,7 @@ function plusSlides(n) {
       }
       titleContent = n[index].title;
       slideContent.innerHTML = `<${format} class="slide-content-diapo ${nextContent.className}" id="${nextContent.id}"src="${nextContent.src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
-      title();
+      // title();
     }
   });
 }
@@ -166,7 +251,7 @@ function lessSlides(n) {
       }" id="${contentNodelist[contentNodelist.length - 2].id}"src="${
         contentNodelist[contentNodelist.length - 2].src
       }"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
-      title();
+      // title();
     } else {
       if (previusContent.src.indexOf("jpg") === -1) {
         format = "video controls";
@@ -175,7 +260,7 @@ function lessSlides(n) {
       }
       titleContent = n[index - 2].title;
       slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
-      title();
+      // title();
     }
   });
 }
@@ -196,7 +281,6 @@ function likes() {
         btnLike.classList.add("like-active");
         totalLikes += 1;
         // likesContainer.innerHTML = `<input type="number" id="total-like" value="${totalLikes}" name=""> <i class="fa-solid fa-heart"></i>`;
-        console.log(parseInt(likesContainer.children[0].value));
         likesContainer.children[0].value =
           parseInt(likesContainer.children[0].value) + 1;
       } else {
@@ -219,9 +303,7 @@ function sortContent(n) {
   const popularite = document.querySelector(".sort-populaire");
   const date = document.querySelector(".sort-date");
   const titre = document.querySelector(".sort-titre");
-  const testttt = document.querySelector(".photos-factory");
   let contentSort = n;
-  console.log(testttt);
   // mediaFactory(contentSort);
 
   popularite.addEventListener("click", () => {
@@ -236,6 +318,10 @@ function sortContent(n) {
     //   return bLikes - aLikes;
     // });
     console.log("bubulle");
+
+    //     let children = document.querySelector('.child');
+    // children = children.sort(functionComparison);
+    // document.querySelector('.parent').replaceChildren(children);
   });
   date.addEventListener("click", () => {
     popularite.classList.toggle("is-hidden");
@@ -253,56 +339,63 @@ function sortContent(n) {
     date.classList.toggle("is-visible");
     arrow3.classList.toggle("is-hidden");
     ligne3.classList.toggle("is-hidden");
-    contentSort.sort((a, b) => {
-      let aLow = a.title;
-      let bLow = b.title;
-      if (aLow < bLow) return -1;
-      if (aLow > bLow) return 1;
-      if (aLow === bLow) return 0;
-    });
-    let index = 0;
-    const photographerMediaHTML = document.querySelector(".photos-factory");
-    photographerMediaHTML.innerHTML = "";
-    contentSort.forEach((item) => {
-      const title = item.title;
-      const price = item.price;
-      const id = item.photographerId;
-      const contentId = item.id;
-      const like = item.likes;
-      const article = document.createElement("article");
-      let contents;
-      let media;
-      if (item.image) {
-        contents = document.createElement("img");
-        media = item.image;
-      } else {
-        contents = document.createElement("video");
-        media = item.video;
-      }
-      // console.log(contentId.toString().length);
-      contents.setAttribute("src", `../assets/photos/${id}/${media}`);
-      contents.setAttribute("id", `${contentId}`);
-      contents.setAttribute("class", `photographer-content ${(index += 1)}`);
-      // contents.setAttribute("index", `${(index += 1)}`);
-      const h2 = document.createElement("h2");
-      const likes = document.createElement("likes");
-      likes.classList.add("likes-container");
-      const pricePerDay = document.getElementById("pricePerDay");
-      h2.textContent = `${title}`;
-      // likes.innerHTML = `${like} <i class="fa-solid fa-heart like"></i>`;
 
-      likes.innerHTML = `<input type="number" class="input-like" value="${like}" name=""> <i class="fa-solid fa-heart like"></i>`;
+    // let children = document.querySelector('.child');
+    // cildren = children.sort(functionComparison);
 
-      pricePerDay.textContent = `${price}€ / jour`;
-      article.appendChild(contents);
-      article.appendChild(h2);
-      article.appendChild(likes);
-      photographerMediaHTML.appendChild(article);
+    // document.querySelector(".parent").replaceChildren(children);
+    // contentSort.sort((a, b) => {
+    //   let aLow = a.title;
+    //   let bLow = b.title;
+    //   if (aLow < bLow) return -1;
+    //   if (aLow > bLow) return 1;
+    //   if (aLow === bLow) return 0;
+    // });
+    // testttt.replaceChildren(contentSort);
 
-      return photographerMediaHTML;
-    });
-    diaporama(contentSort);
-    likes();
+    // let index = 0;
+    // const photographerMediaHTML = document.querySelector(".photos-factory");
+    // photographerMediaHTML.innerHTML = "";
+    // contentSort.forEach((item) => {
+    //   const title = item.title;
+    //   const price = item.price;
+    //   const id = item.photographerId;
+    //   const contentId = item.id;
+    //   const like = item.likes;
+    //   const article = document.createElement("article");
+    //   let contents;
+    //   let media;
+    //   if (item.image) {
+    //     contents = document.createElement("img");
+    //     media = item.image;
+    //   } else {
+    //     contents = document.createElement("video");
+    //     media = item.video;
+    //   }
+    //   // console.log(contentId.toString().length);
+    //   contents.setAttribute("src", `../assets/photos/${id}/${media}`);
+    //   contents.setAttribute("id", `${contentId}`);
+    //   contents.setAttribute("class", `photographer-content ${(index += 1)}`);
+    //   // contents.setAttribute("index", `${(index += 1)}`);
+    //   const h2 = document.createElement("h2");
+    //   const likes = document.createElement("likes");
+    //   likes.classList.add("likes-container");
+    //   const pricePerDay = document.getElementById("pricePerDay");
+    //   h2.textContent = `${title}`;
+    //   // likes.innerHTML = `${like} <i class="fa-solid fa-heart like"></i>`;
+
+    //   likes.innerHTML = `<input type="number" class="input-like" value="${like}" name=""> <i class="fa-solid fa-heart like"></i>`;
+
+    //   pricePerDay.textContent = `${price}€ / jour`;
+    //   article.appendChild(contents);
+    //   article.appendChild(h2);
+    //   article.appendChild(likes);
+    //   photographerMediaHTML.appendChild(article);
+
+    //   return photographerMediaHTML;
+    // });
+    // diaporama(contentSort);
+    // likes();
   });
 }
 
