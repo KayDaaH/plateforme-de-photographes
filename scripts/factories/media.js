@@ -348,6 +348,7 @@ function sortContent(n) {
                 <i class="fa-solid fa-heart like"></i>
             </likes>
         </article>`;
+        diaporama(photographerMedias);
       });
     }
 
@@ -405,6 +406,7 @@ function sortContent(n) {
                 <i class="fa-solid fa-heart like"></i>
             </likes>
         </article>`;
+        diaporama(photographerMedias);
       });
     }
   });
@@ -458,6 +460,7 @@ function sortContent(n) {
                 <i class="fa-solid fa-heart like"></i>
             </likes>
         </article>`;
+        diaporama(photographerMedias);
       });
     }
     // testttt.replaceChildren(contentSort);
