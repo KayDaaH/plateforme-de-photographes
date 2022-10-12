@@ -2,7 +2,6 @@ const photosFactory = document.querySelector(".photos-factory");
 
 function mediaFactory(data) {
   const photographerMedias = data;
-  console.log(data);
 
   // function photosFactoryDOM() {
   //   let index = 0;
@@ -303,7 +302,7 @@ function sortContent(n) {
   const popularite = document.querySelector(".sort-populaire");
   const date = document.querySelector(".sort-date");
   const titre = document.querySelector(".sort-titre");
-  let contentSort = n;
+  let photographerMedias = n;
   // mediaFactory(contentSort);
 
   popularite.addEventListener("click", () => {
@@ -312,12 +311,45 @@ function sortContent(n) {
     arrow1.classList.toggle("active");
     arrow2.classList.add("is-hidden");
     arrow3.classList.add("is-hidden");
-    // contentSort.sort((a, b) => {
-    //   let aLikes = a.likes;
-    //   let bLikes = b.likes;
-    //   return bLikes - aLikes;
-    // });
-    console.log("bubulle");
+    popularite.classList.toggle("search-off");
+    if (popularite.classList.contains("search-off") != true) {
+      console.log("popularité");
+      photographerMedias.sort((a, b) => {
+        let aLikes = a.likes;
+        let bLikes = b.likes;
+        return bLikes - aLikes;
+      });
+      photosFactory.innerHTML = "";
+
+      let index = 0;
+      photographerMedias.forEach((item) => {
+        const photosFactory = document.querySelector(".photos-factory");
+        const id = item.id;
+        const photographerId = item.photographerId;
+        const title = item.title;
+        const likes = item.likes;
+        const price = item.price;
+        const article = document.createElement("article");
+        photosFactory.appendChild(article);
+
+        if (item.image) {
+          type = "img";
+          media = item.image;
+        } else {
+          media = item.video;
+          type = "video";
+        }
+        article.innerHTML = `
+        <article content-id = "${id}" photographer-id = "${photographerId}" title = "${title}" likes = "${likes}" price = "${price}" type = "${type}">;
+            <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}"></${type}>
+            <h2>${title}</h2>
+            <likes class="likes-container">
+                <input type="number" class="input-like" value="${likes}" name="">
+                <i class="fa-solid fa-heart like"></i>
+            </likes>
+        </article>`;
+      });
+    }
 
     //     let children = document.querySelector('.child');
     // children = children.sort(functionComparison);
@@ -328,29 +360,106 @@ function sortContent(n) {
     titre.classList.toggle("is-visible");
     arrow2.classList.toggle("is-hidden");
     ligne2.classList.toggle("is-hidden");
-    // contentSort.sort((a, b) => {
-    //   let aLikes = a.likes;
-    //   let bLikes = b.likes;
-    //   return bLikes - aLikes;
-    // });
+    date.classList.toggle("search-off");
+    if (date.classList.contains("search-off") != true) {
+      console.log("date");
+
+      // let children = document.querySelector('.child');
+      // cildren = children.sort(functionComparison);
+
+      // document.querySelector(".parent").replaceChildren(children);
+      photographerMedias.sort((a, b) => {
+        let aLow = a.date;
+        let bLow = b.date;
+        if (aLow < bLow) return 1;
+        if (aLow > bLow) return -1;
+        if (aLow === bLow) return 0;
+      });
+      console.log(photographerMedias);
+      photosFactory.innerHTML = "";
+      let index = 0;
+      photographerMedias.forEach((item) => {
+        const photosFactory = document.querySelector(".photos-factory");
+        const id = item.id;
+        const photographerId = item.photographerId;
+        const title = item.title;
+        const likes = item.likes;
+        const price = item.price;
+        const article = document.createElement("article");
+
+        photosFactory.appendChild(article);
+
+        if (item.image) {
+          type = "img";
+          media = item.image;
+        } else {
+          media = item.video;
+          type = "video";
+        }
+        article.innerHTML = `
+        <article content-id = "${id}" photographer-id = "${photographerId}" title = "${title}" likes = "${likes}" price = "${price}" type = "${type}">;
+            <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}"></${type}>
+            <h2>${title}</h2>
+            <likes class="likes-container">
+                <input type="number" class="input-like" value="${likes}" name="">
+                <i class="fa-solid fa-heart like"></i>
+            </likes>
+        </article>`;
+      });
+    }
   });
   titre.addEventListener("click", () => {
     popularite.classList.toggle("is-hidden");
     date.classList.toggle("is-visible");
     arrow3.classList.toggle("is-hidden");
     ligne3.classList.toggle("is-hidden");
+    titre.classList.toggle("search-off");
+    if (titre.classList.contains("search-off") != true) {
+      console.log("titre");
 
-    // let children = document.querySelector('.child');
-    // cildren = children.sort(functionComparison);
+      // let children = document.querySelector('.child');
+      // cildren = children.sort(functionComparison);
 
-    // document.querySelector(".parent").replaceChildren(children);
-    // contentSort.sort((a, b) => {
-    //   let aLow = a.title;
-    //   let bLow = b.title;
-    //   if (aLow < bLow) return -1;
-    //   if (aLow > bLow) return 1;
-    //   if (aLow === bLow) return 0;
-    // });
+      // document.querySelector(".parent").replaceChildren(children);
+      photographerMedias.sort((a, b) => {
+        let aLow = a.title;
+        let bLow = b.title;
+        if (aLow < bLow) return -1;
+        if (aLow > bLow) return 1;
+        if (aLow === bLow) return 0;
+      });
+      console.log(photographerMedias);
+      photosFactory.innerHTML = "";
+      let index = 0;
+      photographerMedias.forEach((item) => {
+        const photosFactory = document.querySelector(".photos-factory");
+        const id = item.id;
+        const photographerId = item.photographerId;
+        const title = item.title;
+        const likes = item.likes;
+        const price = item.price;
+        const article = document.createElement("article");
+
+        photosFactory.appendChild(article);
+
+        if (item.image) {
+          type = "img";
+          media = item.image;
+        } else {
+          media = item.video;
+          type = "video";
+        }
+        article.innerHTML = `
+        <article content-id = "${id}" photographer-id = "${photographerId}" title = "${title}" likes = "${likes}" price = "${price}" type = "${type}">;
+            <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}"></${type}>
+            <h2>${title}</h2>
+            <likes class="likes-container">
+                <input type="number" class="input-like" value="${likes}" name="">
+                <i class="fa-solid fa-heart like"></i>
+            </likes>
+        </article>`;
+      });
+    }
     // testttt.replaceChildren(contentSort);
 
     // let index = 0;
