@@ -32,7 +32,7 @@ function mediaFactory(data) {
       }
       article.innerHTML = `
       <article content-id = "${id}" photographer-id = "${photographerId}" title = "${title}" likes = "${likes}" price = "${price}" type = "${type}">;
-          <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}"></${type}>
+          <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}" alt = "${title}"></${type}>
           <h2>${title}</h2>
           <likes class="likes-container">
               <input type="number" class="input-like" value="${likes}" name="">
@@ -67,24 +67,18 @@ function diaporama(data) {
       });
       const diaporamaContainer = document.querySelector(".diaporama-container");
       const slideContent = document.querySelector(".slide-content");
-      const slideTitle = document.querySelector(".content-title");
       const titleContent = title;
       if (link.indexOf("jpg") !== -1) {
         slideContent.innerHTML = `
         <div class="slide-content-container">
-            <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}"> 
+            <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}" alt = "${titleContent}"> 
             <p class="slide-content-title">${titleContent}</p>
         </div>`;
         diaporamaContainer.style.display = "block";
-        const content = document.querySelector(".slide-content-diapo");
-        const title = document.querySelector(".slide-content-title");
-        const slideContentContainer = document.querySelector(
-          "slide-content-container"
-        );
       } else {
         slideContent.innerHTML = `
         <div class="slide-content-container">
-            <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}"></video> 
+            <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}" alt = "${titleContent}"></video> 
             <p class="slide-content-title-video">${titleContent}</p>;
         </div>`;
         diaporamaContainer.style.display = "block";
@@ -120,7 +114,14 @@ function plusSlides(n) {
         classContent = "slide-content-title-video";
       }
       titleContent = n[0].title;
-      slideContent.innerHTML = `<${format} class="slide-content-diapo ${contentNodelist[0].className}" id="${contentNodelist[0].id}"src="${contentNodelist[0].src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+        contentNodelist[0].className
+      }" id="${contentNodelist[0].id}"src="${
+        contentNodelist[0].src
+      }" alt = "${contentNodelist[0].getAttribute(
+        "alt"
+      )}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+
       // title();
     } else {
       if (nextContent.src.indexOf("jpg") === -1) {
@@ -128,8 +129,15 @@ function plusSlides(n) {
         formatEnd = "video";
         classContent = "slide-content-title-video";
       }
+
       titleContent = n[index].title;
-      slideContent.innerHTML = `<${format} class="slide-content-diapo ${nextContent.className}" id="${nextContent.id}"src="${nextContent.src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+        nextContent.className
+      }" id="${nextContent.id}"src="${
+        nextContent.src
+      }" alt = "${nextContent.getAttribute(
+        "alt"
+      )}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
       // title();
     }
   });
@@ -166,7 +174,10 @@ function lessSlides(n) {
         contentNodelist[contentNodelist.length - 2].className
       }" id="${contentNodelist[contentNodelist.length - 2].id}"src="${
         contentNodelist[contentNodelist.length - 2].src
-      }"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+      }" alt = "${contentNodelist[contentNodelist.length - 2].getAttribute(
+        "alt"
+      )}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+
       // title();
     } else {
       if (previusContent.src.indexOf("jpg") === -1) {
@@ -175,7 +186,13 @@ function lessSlides(n) {
         classContent = "slide-content-title-video";
       }
       titleContent = n[index - 2].title;
-      slideContent.innerHTML = `<${format} class="slide-content-diapo ${previusContent.className}" id="${previusContent.id}"src="${previusContent.src}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
+      slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+        previusContent.className
+      }" id="${previusContent.id}"src="${
+        previusContent.src
+      }" alt = "${previusContent.getAttribute(
+        "alt"
+      )}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
       // title();
     }
   });

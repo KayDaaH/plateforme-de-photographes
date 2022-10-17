@@ -13,7 +13,7 @@ async function displayData(photographers) {
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
   });
-  photographerPage(photographers);
+  photographerPage();
   // console.log("Log dans la fonction data()");
 }
 
@@ -25,7 +25,7 @@ async function init() {
 
 init();
 
-function photographerPage(data) {
+function photographerPage() {
   let photographers = document.querySelectorAll(".photographer");
 
   photographers.forEach((e) => {
