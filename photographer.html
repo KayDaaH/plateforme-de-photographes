@@ -62,20 +62,21 @@
     <div class="modal" aria-hidden="true">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img src="assets/icons/close.svg" onclick="closeModal()" alt="fermer le formulaire" id="close-form-btn"
+          class="focusable-elements-form" tabindex="6" />
       </header>
       <form>
         <div>
           <label for="firstname">Prénom</label>
-          <input type="text" name="firstname" id="firstname">
+          <input type="text" name="firstname" id="firstname" class="focusable-elements-form" tabindex="1">
           <label for="name">Nom</label>
-          <input type="text" name="name" id="name">
+          <input type="text" name="name" id="name" class="focusable-elements-form" tabindex="2">
           <label for="email">Email</label>
-          <input type="text" name="email" id="email">
+          <input type="text" name="email" id="email" class="focusable-elements-form" tabindex="3">
           <label for="message">Message</label>
-          <input type="text" name="message" id="message">
+          <input type="text" name="message" id="message" class="focusable-elements-form" tabindex="4">
         </div>
-        <input type="submit" class="contact_button" value="Envoyer">
+        <input type="submit" class="contact_button focusable-elements-form" value="Envoyer" tabindex="5">
       </form>
     </div>
   </div>

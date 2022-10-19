@@ -11,6 +11,11 @@ const firstnameChamp = document.getElementById("firstname");
 const modalFormBtn = document.querySelector(".modal-btn");
 const body = document.getElementById("body");
 
+const focusableElementsForm = modalForm.querySelectorAll(
+  ".focusable-elements-form"
+);
+const focusableElementsFormArray = [...focusableElementsForm];
+
 const diaporamaContainer = document.querySelector(".diaporama-container");
 
 submitBtn.addEventListener("click", btnFormAction);
@@ -43,8 +48,31 @@ function closeDiaporama() {
   diaporamaContainer.style.display = "none";
 }
 
-body.addEventListener("keydown", (keyType) => {
+document.addEventListener("keydown", (keyType) => {
   if (keyType.key === "Escape") {
     closeModal();
+  }
+});
+
+const firstElementFocusableForm = focusableElementsFormArray[1];
+const lastElementFocusableForm = focusableElementsFormArray[0];
+
+document.addEventListener("keydown", (keyType) => {
+  if (
+    (keyType.key === "Tab" || keyType.code === 9) &&
+    keyType.shiftKey === false &&
+    document.activeElement == lastElementFocusableForm
+  ) {
+    firstElementFocusableForm.focus();
+    keyType.preventDefault();
+    console.log(keyType.shiftKey);
+  }
+  if (
+    (keyType.key === "Tab" || keyType.code === 9) &&
+    keyType.shiftKey === true &&
+    document.activeElement == firstElementFocusableForm
+  ) {
+    lastElementFocusableForm.focus();
+    keyType.preventDefault();
   }
 });
