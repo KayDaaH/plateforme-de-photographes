@@ -53,6 +53,7 @@ function closeDiaporama() {
 document.addEventListener("keydown", (keyType) => {
   if (keyType.key === "Escape") {
     closeModal();
+    closeDiaporama();
   }
 });
 

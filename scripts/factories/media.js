@@ -7,6 +7,10 @@ const ligne3 = document.getElementById("sort-ligne3");
 const popularite = document.querySelector(".sort-populaire");
 const date = document.querySelector(".sort-date");
 const titre = document.querySelector(".sort-titre");
+const slidess = document.querySelector("slides");
+const prevLess = document.getElementById("prev-less");
+const prevPlus = document.getElementById("prev-plus");
+const cross = document.querySelector(".close-slide");
 
 function mediaFactory(data) {
   const photographerMedias = data;
@@ -80,14 +84,14 @@ function diaporamaKeyListener(data) {
         if (link.indexOf("jpg") !== -1) {
           slideContent.innerHTML = `
           <div class="slide-content-container">
-              <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}" alt = "${titleContent}" tabindex="2"> 
+              <img class="slide-content-diapo ${e.className} diaporama-focusable" id="${e.id}"src="${e.src}" alt = "${titleContent}" tabindex="2"> 
               <p class="slide-content-title" tabindex="3">${titleContent}</p>
           </div>`;
           diaporamaContainer.style.display = "block";
         } else {
           slideContent.innerHTML = `
           <div class="slide-content-container">
-              <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}" alt = "${titleContent}" tabindex="2"></video> 
+              <video class="slide-content-diapo ${e.className} diaporama-focusable" id="${e.id}"controls src="${e.src}" alt = "${titleContent}" tabindex="2"></video> 
               <p class="slide-content-title-video" tabindex="3">${titleContent}</p>;
           </div>`;
           diaporamaContainer.style.display = "block";
@@ -101,14 +105,39 @@ function diaporamaKeyListener(data) {
   plusSlides(data);
   lessSlides(data);
 }
-const slidess = document.querySelector("slides");
-const prevLess = document.getElementById("prev-less");
-const prevPlus = document.getElementById("prev-plus");
-document.addEventListener("keydown", (e) => {
-  const cross = document.querySelector(".close-slide");
-  if (e.key === "Enter") {
+
+const diaporamaFocusable = document.querySelectorAll(".diaporama-focusable");
+const diaporamaFocusableArray = [...diaporamaFocusable];
+
+document.addEventListener("keydown", (keyType) => {
+  console.log(keyType.key);
+  if (keyType.key === "Enter" && document.activeElement != cross) {
     console.log("ok");
     prevLess.focus();
+  }
+  if (
+    keyType.key == "Tab" &&
+    keyType.shiftKey === false &&
+    document.activeElement ==
+      diaporamaFocusableArray[diaporamaFocusableArray.length - 1]
+  ) {
+    console.log("-----");
+    console.log(document.activeElement);
+    console.log(diaporamaFocusableArray[diaporamaFocusableArray.length - 1]);
+    console.log(diaporamaFocusableArray[0]);
+    diaporamaFocusableArray[0].focus();
+    keyType.preventDefault();
+  }
+  if (
+    keyType.key == "Tab" &&
+    keyType.shiftKey === true &&
+    document.activeElement == diaporamaFocusableArray[0]
+  ) {
+    diaporamaFocusableArray[diaporamaFocusableArray.length - 1].focus();
+    keyType.preventDefault();
+  }
+  if (keyType.key === "Enter" && document.activeElement == cross) {
+    closeDiaporama();
   }
 });
 
