@@ -32,7 +32,7 @@ function mediaFactory(data) {
       }
       article.innerHTML = `
       <article content-id = "${id}" photographer-id = "${photographerId}" title = "${title}" likes = "${likes}" price = "${price}" type = "${type}">;
-          <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}" alt = "${title}"></${type}>
+          <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}" alt = "${title}" tabindex="0"></${type}>
           <h2>${title}</h2>
           <likes class="likes-container">
               <input type="number" class="input-like" value="${likes}" name="">
@@ -49,13 +49,73 @@ function mediaFactory(data) {
     likes();
     sortContent(photographerMedias);
   }
-
   return { photosFactoryDOM };
 }
+
+function diaporamaKeyListener(data) {
+  const contentNodelist = document.querySelectorAll(".photographer-content");
+  const slidesDiaporama = document.querySelector(".slides");
+  let title;
+  contentNodelist.forEach((e) => {
+    e.addEventListener("keydown", (keyType) => {
+      if (
+        keyType.key === "Enter" &&
+        document.activeElement.className.includes("photographer-content") ===
+          true
+      ) {
+        console.log(document.activeElement);
+        console.log(slidesDiaporama);
+        const link = e.src;
+        const id = e.id;
+        data.forEach((e) => {
+          if (id == e.id) {
+            title = e.title;
+          }
+        });
+        const diaporamaContainer = document.querySelector(
+          ".diaporama-container"
+        );
+        const slideContent = document.querySelector(".slide-content");
+        const titleContent = title;
+        if (link.indexOf("jpg") !== -1) {
+          slideContent.innerHTML = `
+          <div class="slide-content-container">
+              <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}" alt = "${titleContent}" tabindex="2"> 
+              <p class="slide-content-title" tabindex="3">${titleContent}</p>
+          </div>`;
+          diaporamaContainer.style.display = "block";
+        } else {
+          slideContent.innerHTML = `
+          <div class="slide-content-container">
+              <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}" alt = "${titleContent}" tabindex="2"></video> 
+              <p class="slide-content-title-video" tabindex="3">${titleContent}</p>;
+          </div>`;
+          diaporamaContainer.style.display = "block";
+        }
+        main.setAttribute("aria-hidden", "true");
+        slidesDiaporama.setAttribute("aria-hidden", "false");
+        console.log("hello");
+      }
+    });
+  });
+  plusSlides(data);
+  lessSlides(data);
+}
+const slidess = document.querySelector("slides");
+const prevLess = document.getElementById("prev-less");
+const prevPlus = document.getElementById("prev-plus");
+document.addEventListener("keydown", (e) => {
+  const cross = document.querySelector(".close-slide");
+  if (e.key === "Enter") {
+    console.log("ok");
+    prevLess.focus();
+  }
+});
 
 function diaporama(data) {
   const contentNodelist = document.querySelectorAll(".photographer-content");
   let title;
+  diaporamaKeyListener(data);
   contentNodelist.forEach((e) => {
     e.addEventListener("click", () => {
       const link = e.src;

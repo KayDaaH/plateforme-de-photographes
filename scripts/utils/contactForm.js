@@ -74,7 +74,6 @@ document.addEventListener("keydown", (keyType) => {
   ) {
     firstElementFocusableForm.focus();
     keyType.preventDefault();
-    console.log(keyType.shiftKey);
   }
   if (
     (keyType.key === "Tab" || keyType.code === 9) &&
