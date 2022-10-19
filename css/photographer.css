@@ -415,7 +415,7 @@ form input {
   background-color: #901c1c;
   right: -120px;
   top: 4px;
-  z-index: 5;
+  z-index: 2;
   user-select: none;
 }
 

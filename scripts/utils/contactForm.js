@@ -1,5 +1,6 @@
 const modal = document.querySelector(".modal-container");
 const submitBtn = document.querySelector(".contact_button");
+const sortMenu = document.querySelector(".sort-menu");
 
 const formFirstname = document.getElementById("firstname");
 const formName = document.getElementById("name");
@@ -12,10 +13,12 @@ submitBtn.addEventListener("click", btnFormAction);
 
 function displayModal() {
   modal.style.display = "block";
+  sortMenu.style.zIndex = "-1";
 }
 
 function closeModal() {
   modal.style.display = "none";
+  sortMenu.style.zIndex = "2";
 }
 
 function btnFormAction(event) {
