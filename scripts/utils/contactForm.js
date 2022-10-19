@@ -15,6 +15,8 @@ const focusableElementsForm = modalForm.querySelectorAll(
   ".focusable-elements-form"
 );
 const focusableElementsFormArray = [...focusableElementsForm];
+const firstElementFocusableForm = focusableElementsFormArray[1];
+const lastElementFocusableForm = focusableElementsFormArray[0];
 
 const diaporamaContainer = document.querySelector(".diaporama-container");
 
@@ -54,8 +56,15 @@ document.addEventListener("keydown", (keyType) => {
   }
 });
 
-const firstElementFocusableForm = focusableElementsFormArray[1];
-const lastElementFocusableForm = focusableElementsFormArray[0];
+document.addEventListener("keydown", (keyType) => {
+  if (
+    keyType.key === "Enter" &&
+    document.activeElement == lastElementFocusableForm
+  ) {
+    keyType.preventDefault();
+    closeModal();
+  }
+});
 
 document.addEventListener("keydown", (keyType) => {
   if (
