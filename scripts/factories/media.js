@@ -7,7 +7,6 @@ const ligne3 = document.getElementById("sort-ligne3");
 const popularite = document.querySelector(".sort-populaire");
 const date = document.querySelector(".sort-date");
 const titre = document.querySelector(".sort-titre");
-const slidess = document.querySelector("slides");
 const prevLess = document.getElementById("prev-less");
 const prevPlus = document.getElementById("prev-plus");
 const cross = document.querySelector(".close-slide");
