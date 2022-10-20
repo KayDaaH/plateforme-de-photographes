@@ -1,6 +1,5 @@
 const urlLocation = window.location.search;
 const params = new URLSearchParams(urlLocation);
-let photographerID = 0;
 let PhotographerMedias = [];
 
 async function getPhotographer() {

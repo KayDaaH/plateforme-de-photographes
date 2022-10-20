@@ -25,7 +25,8 @@ function mediaFactory(data) {
       const price = item.price;
       const article = document.createElement("article");
       photosFactory.appendChild(article);
-
+      let type;
+      let media;
       if (item.image) {
         type = "img";
         media = item.image;
@@ -533,7 +534,8 @@ function afterSort(photographerMedias) {
     const article = document.createElement("article");
 
     photosFactory.appendChild(article);
-
+    let type;
+    let media;
     if (item.image) {
       type = "img";
       media = item.image;
