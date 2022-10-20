@@ -141,6 +141,8 @@ document.addEventListener("keydown", (keyType) => {
 
 function diaporama(data) {
   const contentNodelist = document.querySelectorAll(".photographer-content");
+  const slidesDiaporama = document.querySelector(".slides");
+
   let title;
   diaporamaKeyListener(data);
   contentNodelist.forEach((e) => {
@@ -152,24 +154,27 @@ function diaporama(data) {
           title = e.title;
         }
       });
-      const diaporamaContainer = document.querySelector(".diaporama-container");
       const slideContent = document.querySelector(".slide-content");
       const titleContent = title;
       if (link.indexOf("jpg") !== -1) {
         slideContent.innerHTML = `
-        <div class="slide-content-container">
-            <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}" alt = "${titleContent}"> 
-            <p class="slide-content-title">${titleContent}</p>
-        </div>`;
+          <div class="slide-content-container">
+              <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}" alt = "${titleContent}" tabindex="2"> 
+              <p class="slide-content-title" tabindex="3">${titleContent}</p>
+          </div>`;
         diaporamaContainer.style.display = "block";
       } else {
         slideContent.innerHTML = `
-        <div class="slide-content-container">
-            <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}" alt = "${titleContent}"></video> 
-            <p class="slide-content-title-video">${titleContent}</p>;
-        </div>`;
+          <div class="slide-content-container">
+              <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}" alt = "${titleContent}" tabindex="2"></video> 
+              <p class="slide-content-title-video" tabindex="3">${titleContent}</p>;
+          </div>`;
         diaporamaContainer.style.display = "block";
       }
+      main.setAttribute("aria-hidden", "true");
+      slidesDiaporama.setAttribute("aria-hidden", "false");
+      console.log("hello");
+      prevLess.focus();
     });
   });
   plusSlides(data);
