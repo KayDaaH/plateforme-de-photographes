@@ -84,14 +84,14 @@ function diaporamaKeyListener(data) {
         if (link.indexOf("jpg") !== -1) {
           slideContent.innerHTML = `
           <div class="slide-content-container">
-              <img class="slide-content-diapo ${e.className} diaporama-focusable" id="${e.id}"src="${e.src}" alt = "${titleContent}" tabindex="2"> 
+              <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}" alt = "${titleContent}" tabindex="2"> 
               <p class="slide-content-title" tabindex="3">${titleContent}</p>
           </div>`;
           diaporamaContainer.style.display = "block";
         } else {
           slideContent.innerHTML = `
           <div class="slide-content-container">
-              <video class="slide-content-diapo ${e.className} diaporama-focusable" id="${e.id}"controls src="${e.src}" alt = "${titleContent}" tabindex="2"></video> 
+              <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}" alt = "${titleContent}" tabindex="2"></video> 
               <p class="slide-content-title-video" tabindex="3">${titleContent}</p>;
           </div>`;
           diaporamaContainer.style.display = "block";
@@ -102,8 +102,6 @@ function diaporamaKeyListener(data) {
       }
     });
   });
-  plusSlides(data);
-  lessSlides(data);
 }
 
 const diaporamaFocusable = document.querySelectorAll(".diaporama-focusable");
