@@ -26,6 +26,7 @@ h1 {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
   margin-top: 100px;
+  height: 80vh;
 }
 
 .photographer_section article {
@@ -35,6 +36,7 @@ h1 {
   align-items: center;
   flex-direction: column;
   position: relative;
+  max-height: 300px;
 }
 
 .photographer_section article h2 {
