@@ -247,6 +247,7 @@ function diaporama(data) {
 function plusSlides(n) {
   let net = n;
   const icon = document.getElementById("prev-plus");
+
   icon.addEventListener("click", () => {
     const /* A NodeList of all the elements with the class `photographer-content`. */
       contentNodelist = document.querySelectorAll(".photographer-content");
@@ -300,6 +301,60 @@ function plusSlides(n) {
   document.addEventListener("keydown", (keyType) => {
     console.log(keyType.key);
     if (keyType.key === "Enter" && document.activeElement == prevPlus) {
+      console.log("ok");
+      const /* A NodeList of all the elements with the class `photographer-content`. */
+        contentNodelist = document.querySelectorAll(".photographer-content");
+      const slideContent = document.querySelector(".slide-content");
+      const slideContentDiapo = document.querySelector(".slide-content-diapo");
+      let index = slideContentDiapo.className.slice(
+        41,
+        slideContentDiapo.className.length
+      );
+      let titleContent;
+
+      const nextContent = contentNodelist[index];
+      let format = "img";
+      let formatEnd = "img";
+      let classContent = "slide-content-title";
+
+      if (contentNodelist.length - 1 < Number(index) + 1) {
+        if (contentNodelist[0].src.indexOf("jpg") === -1) {
+          format = "video controls";
+          formatEnd = "video";
+          classContent = "slide-content-title-video";
+        }
+        titleContent = net[0].title;
+        slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+          contentNodelist[0].className
+        }" id="${contentNodelist[0].id}"src="${
+          contentNodelist[0].src
+        }" alt = "${contentNodelist[0].getAttribute(
+          "alt"
+        )}" tabindex="2"></${formatEnd}><p class="${classContent}" tabindex="3">${titleContent}</p>`;
+
+        // title();
+      } else {
+        if (nextContent.src.indexOf("jpg") === -1) {
+          format = "video controls";
+          formatEnd = "video";
+          classContent = "slide-content-title-video";
+        }
+
+        titleContent = n[index].title;
+        slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+          nextContent.className
+        }" id="${nextContent.id}"src="${
+          nextContent.src
+        }" alt = "${nextContent.getAttribute(
+          "alt"
+        )}" tabindex="2"></${formatEnd}><p class="${classContent}" tabindex="3">${titleContent}</p>`;
+        // title();
+      }
+    }
+  });
+  document.addEventListener("keydown", (keyType) => {
+    console.log(keyType.key);
+    if (keyType.key === "ArrowRight") {
       console.log("ok");
       const /* A NodeList of all the elements with the class `photographer-content`. */
         contentNodelist = document.querySelectorAll(".photographer-content");
@@ -410,6 +465,61 @@ function lessSlides(n) {
   document.addEventListener("keydown", (keyType) => {
     console.log(keyType.key);
     if (keyType.key === "Enter" && document.activeElement == prevLess) {
+      console.log("ok");
+      const /* A NodeList of all the elements with the class `photographer-content`. */
+        contentNodelist = document.querySelectorAll(".photographer-content");
+      const slideContent = document.querySelector(".slide-content");
+      const slideContentDiapo = document.querySelector(".slide-content-diapo");
+      let index = slideContentDiapo.className.slice(
+        41,
+        slideContentDiapo.className.length
+      );
+      let titleContent;
+
+      const previusContent = contentNodelist[index - 2];
+      let format = "img";
+      let formatEnd = "img";
+      let classContent = "slide-content-title";
+
+      if (contentNodelist[0].id == slideContentDiapo.id) {
+        if (
+          contentNodelist[contentNodelist.length - 2].src.indexOf("jpg") === -1
+        ) {
+          format = "video controls";
+          formatEnd = "video";
+          classContent = "slide-content-title-video";
+        }
+        titleContent = n[n.length - 1].title;
+        slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+          contentNodelist[contentNodelist.length - 2].className
+        }" id="${contentNodelist[contentNodelist.length - 2].id}"src="${
+          contentNodelist[contentNodelist.length - 2].src
+        }" alt = "${contentNodelist[contentNodelist.length - 2].getAttribute(
+          "alt"
+        )}" tabindex="2"></${formatEnd}><p class="${classContent}" tabindex="3">${titleContent}</p>`;
+
+        // title();
+      } else {
+        if (previusContent.src.indexOf("jpg") === -1) {
+          format = "video controls";
+          formatEnd = "video";
+          classContent = "slide-content-title-video";
+        }
+        titleContent = n[index - 2].title;
+        slideContent.innerHTML = `<${format} class="slide-content-diapo ${
+          previusContent.className
+        }" id="${previusContent.id}"src="${
+          previusContent.src
+        }" alt = "${previusContent.getAttribute(
+          "alt"
+        )}" tabindex="2"></${formatEnd}><p class="${classContent}" tabindex="3">${titleContent}</p>`;
+        // title();
+      }
+    }
+  });
+  document.addEventListener("keydown", (keyType) => {
+    console.log(keyType.key);
+    if (keyType.key === "ArrowLeft") {
       console.log("ok");
       const /* A NodeList of all the elements with the class `photographer-content`. */
         contentNodelist = document.querySelectorAll(".photographer-content");
