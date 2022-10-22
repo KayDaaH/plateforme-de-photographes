@@ -581,7 +581,7 @@ function afterSort(photographerMedias) {
     }
     article.innerHTML = `
         <article content-id = "${id}" photographer-id = "${photographerId}" title = "${title}" likes = "${likes}" price = "${price}" type = "${type}">;
-            <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}"></${type}>
+            <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}" tabindex="0"></${type}>
             <h2>${title}</h2>
             <likes class="likes-container">
                 <input type="number" class="input-like" value="${likes}" name="">
@@ -591,6 +591,11 @@ function afterSort(photographerMedias) {
     diaporama(photographerMedias);
   });
 }
+
+const btnSort = document.getElementById("sort-menu");
+// const popularite = document.querySelector(".sort-populaire");
+// const date = document.querySelector(".sort-date");
+// const titre = document.querySelector(".sort-titre");
 
 function populariteSort(photographerMedias) {
   popularite.addEventListener("click", () => {
@@ -607,6 +612,28 @@ function populariteSort(photographerMedias) {
         return bLikes - aLikes;
       });
       afterSort(photographerMedias);
+    }
+  });
+  document.addEventListener("keydown", (keyType) => {
+    if (
+      keyType.key == "Enter" &&
+      (document.activeElement == btnSort ||
+        document.activeElement == popularite)
+    ) {
+      date.classList.toggle("is-visible");
+      titre.classList.toggle("is-visible");
+      arrow1.classList.toggle("active");
+      arrow2.classList.add("is-hidden");
+      arrow3.classList.add("is-hidden");
+      popularite.classList.toggle("search-off");
+      if (popularite.classList.contains("search-off") != true) {
+        photographerMedias.sort((a, b) => {
+          let aLikes = a.likes;
+          let bLikes = b.likes;
+          return bLikes - aLikes;
+        });
+        afterSort(photographerMedias);
+      }
     }
   });
 }
@@ -629,6 +656,25 @@ function dateSort(photographerMedias) {
       afterSort(photographerMedias);
     }
   });
+  document.addEventListener("keydown", (keyType) => {
+    if (keyType.key == "Enter" && document.activeElement == date) {
+      popularite.classList.toggle("is-hidden");
+      titre.classList.toggle("is-visible");
+      arrow2.classList.toggle("is-hidden");
+      ligne2.classList.toggle("is-hidden");
+      date.classList.toggle("search-off");
+      if (date.classList.contains("search-off") != true) {
+        photographerMedias.sort((a, b) => {
+          let aLow = a.date;
+          let bLow = b.date;
+          if (aLow < bLow) return 1;
+          if (aLow > bLow) return -1;
+          if (aLow === bLow) return 0;
+        });
+        afterSort(photographerMedias);
+      }
+    }
+  });
 }
 function titleSort(photographerMedias) {
   titre.addEventListener("click", () => {
@@ -646,6 +692,25 @@ function titleSort(photographerMedias) {
         if (aLow === bLow) return 0;
       });
       afterSort(photographerMedias);
+    }
+  });
+  document.addEventListener("keydown", (keyType) => {
+    if (keyType.key == "Enter" && document.activeElement == titre) {
+      popularite.classList.toggle("is-hidden");
+      date.classList.toggle("is-visible");
+      arrow3.classList.toggle("is-hidden");
+      ligne3.classList.toggle("is-hidden");
+      titre.classList.toggle("search-off");
+      if (titre.classList.contains("search-off") != true) {
+        photographerMedias.sort((a, b) => {
+          let aLow = a.title;
+          let bLow = b.title;
+          if (aLow < bLow) return -1;
+          if (aLow > bLow) return 1;
+          if (aLow === bLow) return 0;
+        });
+        afterSort(photographerMedias);
+      }
     }
   });
 }

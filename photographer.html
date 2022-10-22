@@ -19,7 +19,7 @@
       <!-- <button class="contact_button" onclick="displayModal()">Contactez-moi</button> -->
 
 
-      <button class="modal-btn modal-trigger" onclick="displayModal()">Contactez-moi</button>
+      <button class="modal-btn modal-trigger" id="btn-sort" onclick="displayModal()">Contactez-moi</button>
       <!-- <div class="overlay modal-trigger"></div>
       <div class="modal"><button class="close-modal modal-trigger"></button></div> -->
 
@@ -27,18 +27,18 @@
       <!-- ------------------------------------------- -->
       <div class="sort-container">
         <h2>Trier par</h2>
-        <div class="sort-menu">
-          <div class="sort-populaire sort-choice">
+        <div class="sort-menu" id="sort-menu" tabindex="-1">
+          <div class="sort-populaire sort-choice" id="classement-populaire" tabindex="0">
             <p>Popularité</p>
             <p id="arrow1">></p>
           </div>
-          <div class="sort-date sort-choice search-off">
+          <div class="sort-date sort-choice search-off" id="classement-date" tabindex="0">
             <p>Date</p>
             <p id="arrow2">></p>
 
             <p id="sort-ligne2"></p>
           </div>
-          <div class="sort-titre sort-choice search-off">
+          <div class="sort-titre sort-choice search-off" id="classement-titre" tabindex="0">
             <p>Titre</p>
             <p id="arrow3">></p>
             <p id="sort-ligne3"></p>
