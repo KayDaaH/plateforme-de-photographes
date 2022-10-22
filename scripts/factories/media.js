@@ -59,6 +59,8 @@ function mediaFactory(data) {
 function diaporamaKeyListener(data) {
   const contentNodelist = document.querySelectorAll(".photographer-content");
   const slidesDiaporama = document.querySelector(".slides");
+  let contentTitle;
+
   let title;
   contentNodelist.forEach((e) => {
     e.addEventListener("keydown", (keyType) => {
@@ -67,8 +69,6 @@ function diaporamaKeyListener(data) {
         document.activeElement.className.includes("photographer-content") ===
           true
       ) {
-        console.log(document.activeElement);
-        console.log(slidesDiaporama);
         const link = e.src;
         const id = e.id;
         data.forEach((e) => {
@@ -85,20 +85,23 @@ function diaporamaKeyListener(data) {
           slideContent.innerHTML = `
           <div class="slide-content-container">
               <img class="slide-content-diapo ${e.className}" id="${e.id}"src="${e.src}" alt = "${titleContent}" tabindex="2"> 
-              <p class="slide-content-title" tabindex="3">${titleContent}</p>
+              <p class="slide-content-title" id="title-content-id" tabindex="3">${titleContent}</p>
           </div>`;
           diaporamaContainer.style.display = "block";
+          contentTitle = document.getElementById("title-content-id");
+          contentTitle.focus();
         } else {
           slideContent.innerHTML = `
           <div class="slide-content-container">
               <video class="slide-content-diapo ${e.className}" id="${e.id}"controls src="${e.src}" alt = "${titleContent}" tabindex="2"></video> 
-              <p class="slide-content-title-video" tabindex="3">${titleContent}</p>;
+              <p class="slide-content-title-video" id="title-content-id" tabindex="3">${titleContent}</p>;
           </div>`;
           diaporamaContainer.style.display = "block";
+          contentTitle = document.getElementById("title-content-id");
+          contentTitle.focus();
         }
         main.setAttribute("aria-hidden", "true");
         slidesDiaporama.setAttribute("aria-hidden", "false");
-        console.log("hello");
       }
     });
   });
@@ -106,74 +109,6 @@ function diaporamaKeyListener(data) {
 
 const diaporamaFocusable = document.querySelectorAll(".diaporama-focusable");
 const diaporamaFocusableArray = [...diaporamaFocusable];
-
-document.addEventListener("keydown", (keyType) => {
-  console.log(keyType.key);
-  if (
-    keyType.key === "Enter" &&
-    document.activeElement != cross &&
-    document.activeElement != prevLess &&
-    document.activeElement != prevPlus
-  ) {
-    console.log("ok");
-    prevLess.focus();
-  }
-});
-
-// document.addEventListener("keydown", (keyType) => {
-//   console.log(keyType.key);
-//   if (keyType.key === "Enter" && document.activeElement == prevLess) {
-//     console.log("ok");
-//     const /* A NodeList of all the elements with the class `photographer-content`. */
-//       contentNodelist = document.querySelectorAll(".photographer-content");
-//     const slideContent = document.querySelector(".slide-content");
-//     const slideContentDiapo = document.querySelector(".slide-content-diapo");
-//     let index = slideContentDiapo.className.slice(
-//       41,
-//       slideContentDiapo.className.length
-//     );
-//     let titleContent;
-
-//     const nextContent = contentNodelist[index];
-//     let format = "img";
-//     let formatEnd = "img";
-//     let classContent = "slide-content-title";
-
-//     if (contentNodelist.length - 1 < Number(index) + 1) {
-//       if (contentNodelist[0].src.indexOf("jpg") === -1) {
-//         format = "video controls";
-//         formatEnd = "video";
-//         classContent = "slide-content-title-video";
-//       }
-//       titleContent = n[0].title;
-//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${
-//         contentNodelist[0].className
-//       }" id="${contentNodelist[0].id}"src="${
-//         contentNodelist[0].src
-//       }" alt = "${contentNodelist[0].getAttribute(
-//         "alt"
-//       )}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
-
-//       // title();
-//     } else {
-//       if (nextContent.src.indexOf("jpg") === -1) {
-//         format = "video controls";
-//         formatEnd = "video";
-//         classContent = "slide-content-title-video";
-//       }
-
-//       titleContent = n[index].title;
-//       slideContent.innerHTML = `<${format} class="slide-content-diapo ${
-//         nextContent.className
-//       }" id="${nextContent.id}"src="${
-//         nextContent.src
-//       }" alt = "${nextContent.getAttribute(
-//         "alt"
-//       )}"></${formatEnd}><p class="${classContent}">${titleContent}</p>`;
-//       // title();
-//     }
-//   }
-// });
 
 document.addEventListener("keydown", (keyType) => {
   if (
@@ -236,7 +171,6 @@ function diaporama(data) {
       }
       main.setAttribute("aria-hidden", "true");
       slidesDiaporama.setAttribute("aria-hidden", "false");
-      console.log("hello");
       prevLess.focus();
     });
   });
@@ -299,9 +233,7 @@ function plusSlides(n) {
     }
   });
   document.addEventListener("keydown", (keyType) => {
-    console.log(keyType.key);
     if (keyType.key === "Enter" && document.activeElement == prevPlus) {
-      console.log("ok");
       const /* A NodeList of all the elements with the class `photographer-content`. */
         contentNodelist = document.querySelectorAll(".photographer-content");
       const slideContent = document.querySelector(".slide-content");
@@ -353,9 +285,7 @@ function plusSlides(n) {
     }
   });
   document.addEventListener("keydown", (keyType) => {
-    console.log(keyType.key);
     if (keyType.key === "ArrowRight") {
-      console.log("ok");
       const /* A NodeList of all the elements with the class `photographer-content`. */
         contentNodelist = document.querySelectorAll(".photographer-content");
       const slideContent = document.querySelector(".slide-content");
@@ -463,9 +393,7 @@ function lessSlides(n) {
     }
   });
   document.addEventListener("keydown", (keyType) => {
-    console.log(keyType.key);
     if (keyType.key === "Enter" && document.activeElement == prevLess) {
-      console.log("ok");
       const /* A NodeList of all the elements with the class `photographer-content`. */
         contentNodelist = document.querySelectorAll(".photographer-content");
       const slideContent = document.querySelector(".slide-content");
@@ -518,9 +446,7 @@ function lessSlides(n) {
     }
   });
   document.addEventListener("keydown", (keyType) => {
-    console.log(keyType.key);
     if (keyType.key === "ArrowLeft") {
-      console.log("ok");
       const /* A NodeList of all the elements with the class `photographer-content`. */
         contentNodelist = document.querySelectorAll(".photographer-content");
       const slideContent = document.querySelector(".slide-content");

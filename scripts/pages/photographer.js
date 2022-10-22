@@ -45,18 +45,7 @@ async function mediaData(media) {
 
   const photographerMediaOk = mediaFactory(PhotographerMedias);
   const mediaCardDOM = photographerMediaOk.photosFactoryDOM();
-  // sort(PhotographerMedias);
 }
-
-// async function getPictures() {
-//   const data = `..assets/photos/${photographerName}/${source}`;
-//   console.log(data);
-//   return data;
-// }
-
-// async function dataPictures() {
-//   const photographersPictures = document.querySelector(".photos-factory");
-// }
 
 async function init() {
   const photographer = await getPhotographer();

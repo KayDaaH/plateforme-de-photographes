@@ -14,7 +14,6 @@ async function displayData(photographers) {
     photographersSection.appendChild(userCardDOM);
   });
   photographerPage();
-  // console.log("Log dans la fonction data()");
 }
 
 async function init() {

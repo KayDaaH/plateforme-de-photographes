@@ -40,10 +40,6 @@ function closeModal() {
 
 function btnFormAction(event) {
   event.preventDefault();
-  console.log(formFirstname.value);
-  console.log(formName.value);
-  console.log(formEmail.value);
-  console.log(formMessage.value);
 }
 
 function closeDiaporama() {
