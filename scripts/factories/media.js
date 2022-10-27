@@ -56,6 +56,7 @@ function mediaFactory(data) {
   return { photosFactoryDOM };
 }
 
+// Affichage du diaporama à l'aide du clavier
 function diaporamaKeyListener(data) {
   const contentNodelist = document.querySelectorAll(".photographer-content");
   const slidesDiaporama = document.querySelector(".slides");
@@ -110,6 +111,7 @@ function diaporamaKeyListener(data) {
 const diaporamaFocusable = document.querySelectorAll(".diaporama-focusable");
 const diaporamaFocusableArray = [...diaporamaFocusable];
 
+// boucle d'élement selectionnables avec tab pour l'accessibilité
 document.addEventListener("keydown", (keyType) => {
   if (
     keyType.key == "Tab" &&
@@ -137,6 +139,7 @@ document.addEventListener("keydown", (keyType) => {
   }
 });
 
+// Afficher le diaporama
 function diaporama(data) {
   const contentNodelist = document.querySelectorAll(".photographer-content");
   const slidesDiaporama = document.querySelector(".slides");
@@ -178,6 +181,7 @@ function diaporama(data) {
   lessSlides(data);
 }
 
+// Passer au diaporama suivant
 function plusSlides(n) {
   let net = n;
   const icon = document.getElementById("prev-plus");
@@ -338,6 +342,7 @@ function plusSlides(n) {
   });
 }
 
+// Passer au diaporama précédent
 function lessSlides(n) {
   let net = n;
   const icon = document.getElementById("prev-less");
@@ -499,7 +504,7 @@ function lessSlides(n) {
     }
   });
 }
-
+// Gestion des likes
 function likes() {
   const likeContainer = document.querySelectorAll(".likes-container");
   const likesContainer = document.getElementById("total-likes");
@@ -538,25 +543,26 @@ function sortContent(n) {
   titleSort(photographerMedias);
 }
 
-function title() {
-  const slideContent = document.querySelector(".slide-content");
-  const content = document.querySelector(".slide-content-diapo");
-  let title;
-  if (slideContent.children[1].className == "slide-content-title") {
-    title = document.querySelector(".slide-content-title");
-    let offSetLeft = content.offsetLeft;
-    let offSetHeight = content.offsetHeight - 20;
-    let heightContent = slideContent.offsetHeight;
+// function title() {
+//   const slideContent = document.querySelector(".slide-content");
+//   const content = document.querySelector(".slide-content-diapo");
+//   let title;
+//   if (slideContent.children[1].className == "slide-content-title") {
+//     title = document.querySelector(".slide-content-title");
+//     let offSetLeft = content.offsetLeft;
+//     let offSetHeight = content.offsetHeight - 20;
+//     let heightContent = slideContent.offsetHeight;
 
-    if (offSetHeight == 737) offSetHeight += 70;
-    if (offSetHeight == 821) offSetHeight += 30;
-    if (offSetHeight != heightContent - 20) offSetHeight += 40;
+//     if (offSetHeight == 737) offSetHeight += 70;
+//     if (offSetHeight == 821) offSetHeight += 30;
+//     if (offSetHeight != heightContent - 20) offSetHeight += 40;
 
-    title.style.left = offSetLeft + "px";
-    title.style.top = offSetHeight + "px";
-  }
-}
+//     title.style.left = offSetLeft + "px";
+//     title.style.top = offSetHeight + "px";
+//   }
+// }
 
+// Affichage des médias après le Tri
 function afterSort(photographerMedias) {
   photosFactory.innerHTML = "";
   let index = 0;
@@ -597,6 +603,7 @@ const btnSort = document.getElementById("sort-menu");
 // const date = document.querySelector(".sort-date");
 // const titre = document.querySelector(".sort-titre");
 
+// Tri par nombre de like
 function populariteSort(photographerMedias) {
   popularite.addEventListener("click", () => {
     date.classList.toggle("is-visible");
@@ -638,6 +645,7 @@ function populariteSort(photographerMedias) {
   });
 }
 
+// tri par date
 function dateSort(photographerMedias) {
   date.addEventListener("click", () => {
     popularite.classList.toggle("is-hidden");
@@ -676,6 +684,8 @@ function dateSort(photographerMedias) {
     }
   });
 }
+
+// Tri par titre.
 function titleSort(photographerMedias) {
   titre.addEventListener("click", () => {
     popularite.classList.toggle("is-hidden");

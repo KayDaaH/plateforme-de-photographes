@@ -502,7 +502,6 @@ form input {
 }
 .input-like {
   pointer-events: none;
-  border: none;
   color: #c23211;
   font-size: 25px;
   font-weight: bold;
@@ -514,6 +513,13 @@ form input {
   display: flex;
   justify-content: right;
   text-align: right;
+  margin-right: 10px;
+  border-style: none;
+}
+
+.input-like:focus {
+  outline: none;
+  background-color: black;
 }
 
 .like {
