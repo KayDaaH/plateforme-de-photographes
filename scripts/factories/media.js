@@ -39,7 +39,7 @@ function mediaFactory(data) {
           <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}" alt = "${title}" tabindex="0"></${type}>
           <h2>${title}</h2>
           <likes class="likes-container">
-              <input type="number" class="input-like" value="${likes}" name="">
+              <input type="number" class="input-like" value="${likes}" name="" readonly>
               <i class="fa-solid fa-heart like"></i>
           </likes>
       </article>`;
@@ -508,13 +508,32 @@ function lessSlides(n) {
 function likes() {
   const likeContainer = document.querySelectorAll(".likes-container");
   const likesContainer = document.getElementById("total-likes");
+  const inputLikes = document.querySelector("input-like");
 
   let totalLikes = 0;
   Array.from(likeContainer).forEach((e) => {
     const btnLike = e.children[1];
     totalLikes += parseInt(e.children[0].value);
     likesContainer.innerHTML = `<input type="number" id="total-like" value="${totalLikes}" name=""> <i class="fa-solid fa-heart big-heart"></i>`;
-
+    document.addEventListener("keydown", (keyType) => {
+      if (keyType.key === "Enter" && document.activeElement === e.children[0]) {
+        console.log("test");
+        if (btnLike.classList.contains("like-active") != true) {
+          e.children[0].value = parseInt(e.children[0].value) + 1;
+          btnLike.classList.add("like-active");
+          totalLikes += 1;
+          // likesContainer.innerHTML = `<input type="number" id="total-like" value="${totalLikes}" name=""> <i class="fa-solid fa-heart"></i>`;
+          likesContainer.children[0].value =
+            parseInt(likesContainer.children[0].value) + 1;
+        } else {
+          e.children[0].value = parseInt(e.children[0].value) - 1;
+          btnLike.classList.remove("like-active");
+          totalLikes -= 1;
+          likesContainer.children[0].value =
+            parseInt(likesContainer.children[0].value) - 1;
+        }
+      }
+    });
     btnLike.addEventListener("click", () => {
       if (btnLike.classList.contains("like-active") != true) {
         e.children[0].value = parseInt(e.children[0].value) + 1;
@@ -542,25 +561,6 @@ function sortContent(n) {
   dateSort(photographerMedias);
   titleSort(photographerMedias);
 }
-
-// function title() {
-//   const slideContent = document.querySelector(".slide-content");
-//   const content = document.querySelector(".slide-content-diapo");
-//   let title;
-//   if (slideContent.children[1].className == "slide-content-title") {
-//     title = document.querySelector(".slide-content-title");
-//     let offSetLeft = content.offsetLeft;
-//     let offSetHeight = content.offsetHeight - 20;
-//     let heightContent = slideContent.offsetHeight;
-
-//     if (offSetHeight == 737) offSetHeight += 70;
-//     if (offSetHeight == 821) offSetHeight += 30;
-//     if (offSetHeight != heightContent - 20) offSetHeight += 40;
-
-//     title.style.left = offSetLeft + "px";
-//     title.style.top = offSetHeight + "px";
-//   }
-// }
 
 // Affichage des médias après le Tri
 function afterSort(photographerMedias) {
@@ -590,18 +590,16 @@ function afterSort(photographerMedias) {
             <${type} src="../assets/photos/${photographerId}/${media}" id = "${id}" class="photographer-content ${(index += 1)}" tabindex="0"></${type}>
             <h2>${title}</h2>
             <likes class="likes-container">
-                <input type="number" class="input-like" value="${likes}" name="">
+                <input type="number" class="input-like" value="${likes}" name="" readonly>
                 <i class="fa-solid fa-heart like"></i>
             </likes>
         </article>`;
     diaporama(photographerMedias);
   });
+  likes();
 }
 
 const btnSort = document.getElementById("sort-menu");
-// const popularite = document.querySelector(".sort-populaire");
-// const date = document.querySelector(".sort-date");
-// const titre = document.querySelector(".sort-titre");
 
 // Tri par nombre de like
 function populariteSort(photographerMedias) {
